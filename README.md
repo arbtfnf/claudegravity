@@ -1,6 +1,6 @@
 # Antigravity Skills & AI Workflows
 
-![Antigravity Skills](https://img.shields.io/badge/AI-Antigravity-blue) ![Workflows](https://img.shields.io/badge/Automation-Agentic-green)
+![Antigravity Skills](https://img.shields.io/badge/AI-Antigravity-blue) ![Workflows](https://img.shields.io/badge/Automation-Agentic-green) [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/arbtfnf)
 
 A powerful collection of autonomous AI agent skills and workflows, ported from Claude Code, designed specifically for the **Antigravity AI Coding Assistant**. This repository supercharges your agentic coding experience with automated batch processing, deep code reviews, and background maintenance polling.
 
@@ -21,3 +21,11 @@ Once installed, simply instruct the AI in natural language:
 * *"Batch process this framework migration..."*
 * *"Start a maintenance loop to watch the PR"*
 * *"Debug your current session"*
+
+---
+
+## ☕ Support
+
+If you find these skills helpful and want to support the development of more Antigravity workflows, consider buying me a coffee!
+
+[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/arbtfnf)
