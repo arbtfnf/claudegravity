@@ -21,6 +21,3 @@ Once installed, simply instruct the AI in natural language:
 * *"Batch process this framework migration..."*
 * *"Start a maintenance loop to watch the PR"*
 * *"Debug your current session"*
-
-## 🔍 SEO & Discoverability
-Designed for developers looking for **AI Coding Assistant Skills**, **Agentic Workflows**, **Automated Code Review**, and **Claude Code Alternatives**. Enhance your AI pair programming with true autonomous workflow orchestration.
