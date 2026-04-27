@@ -6,28 +6,16 @@ export const metadata = {
   description: "Browse our active initiatives in social, progressive, and responsible categories.",
 };
 
-const INITIATIVES = [
-  {
-    id: 1,
-    title: "The Heartbeat of Equity: Fixing the Healthcare Divide",
-    slug: "/posts/healthcare-revolution",
-    date: "April 28, 2026",
-    category: "Responsible",
-    tags: ["Social", "Healthcare"],
-    excerpt: "Exploring the gap between India and US systems and our initiative to fix the geographic lottery."
-  },
-  {
-    id: 3,
-    title: "Digital Privacy in the Age of Health Insurance",
-    slug: "/posts/healthcare-revolution",
-    date: "April 26, 2026",
-    category: "Progressive",
-    tags: ["Responsible", "Data"],
-    excerpt: "How we can build trust-less verification systems to prevent insurance fraud."
-  }
-];
+async function getInitiatives() {
+  const res = await fetch('http://localhost:3000/api/posts', { cache: 'no-store' });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.posts.filter(p => p.category !== 'Tech');
+}
 
-export default function InitiativesPage() {
+export default async function InitiativesPage() {
+  const initiatives = await getInitiatives();
+
   return (
     <>
       <Navbar />
@@ -38,7 +26,7 @@ export default function InitiativesPage() {
         </header>
         
         <div style={styles.grid}>
-          {INITIATIVES.map((post) => (
+          {initiatives.map((post) => (
             <BlogCard key={post.id} {...post} />
           ))}
         </div>

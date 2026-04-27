@@ -2,37 +2,16 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import BlogCard from '@/components/BlogCard';
 
-const DUMMY_POSTS = [
-  {
-    id: 1,
-    title: "The Heartbeat of Equity: Fixing the Healthcare Divide",
-    slug: "/posts/healthcare-revolution",
-    date: "April 28, 2026",
-    category: "Responsible",
-    tags: ["Social", "Healthcare"],
-    excerpt: "Exploring the gap between India and US systems and our initiative to fix the geographic lottery."
-  },
-  {
-    id: 2,
-    title: "Scaling Referral Protocols for Rural India",
-    slug: "/tech/scaling-referral-systems",
-    date: "April 27, 2026",
-    category: "Tech",
-    tags: ["Progressive", "Infrastructure"],
-    excerpt: "A deep dive into the decentralized architecture needed to connect 600,000 villages."
-  },
-  {
-    id: 3,
-    title: "Digital Privacy in the Age of Health Insurance",
-    slug: "/posts/healthcare-revolution", // Placeholder for now
-    date: "April 26, 2026",
-    category: "Progressive",
-    tags: ["Responsible", "Data"],
-    excerpt: "How we can build trust-less verification systems to prevent insurance fraud."
-  }
-];
+async function getPosts() {
+  const res = await fetch('http://localhost:3000/api/posts', { cache: 'no-store' });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.posts;
+}
 
-export default function Home() {
+export default async function Home() {
+  const posts = await getPosts();
+
   return (
     <>
       <Navbar />
@@ -46,7 +25,7 @@ export default function Home() {
           </div>
           
           <div style={styles.grid}>
-            {DUMMY_POSTS.map((post) => (
+            {posts.map((post) => (
               <BlogCard key={post.id} {...post} />
             ))}
           </div>

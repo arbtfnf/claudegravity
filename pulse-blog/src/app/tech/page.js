@@ -6,19 +6,16 @@ export const metadata = {
   description: "Deep-dives into the architecture and challenges of scaling social technology.",
 };
 
-const TECH_POSTS = [
-  {
-    id: 2,
-    title: "Scaling Referral Protocols for Rural India",
-    slug: "/tech/scaling-referral-systems",
-    date: "April 27, 2026",
-    category: "Tech",
-    tags: ["Progressive", "Infrastructure"],
-    excerpt: "A deep dive into the decentralized architecture needed to connect 600,000 villages."
-  }
-];
+async function getTechPosts() {
+  const res = await fetch('http://localhost:3000/api/posts', { cache: 'no-store' });
+  if (!res.ok) return [];
+  const data = await res.json();
+  return data.posts.filter(p => p.category === 'Tech');
+}
 
-export default function TechPage() {
+export default async function TechPage() {
+  const techPosts = await getTechPosts();
+
   return (
     <>
       <Navbar />
@@ -29,7 +26,7 @@ export default function TechPage() {
         </header>
         
         <div style={styles.grid}>
-          {TECH_POSTS.map((post) => (
+          {techPosts.map((post) => (
             <BlogCard key={post.id} {...post} />
           ))}
         </div>
