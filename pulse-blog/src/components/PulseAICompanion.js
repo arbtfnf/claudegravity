@@ -36,7 +36,7 @@ export default function PulseAICompanion({ topic }) {
           <span style={styles.icon}>🤖</span>
           <h3 style={styles.title}>Pulse Interactive Companion</h3>
         </div>
-        <a href="https://youtube.com/@PulseInitiatives" target="_blank" rel="noreferrer" style={styles.ytButton}>
+        <a href={`https://www.youtube.com/results?search_query=Pulse+Initiatives+${encodeURIComponent(topic)}`} target="_blank" rel="noreferrer" style={styles.ytButton}>
           ▶️ Watch Explainer on YouTube
         </a>
       </div>
