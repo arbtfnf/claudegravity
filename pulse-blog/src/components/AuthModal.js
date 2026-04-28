@@ -10,49 +10,47 @@ export default function AuthModal({ isOpen, onClose }) {
   const [name, setName] = useState('');
 
   const handleGoogleLogin = async () => {
+    // Check if Supabase is configured
+    const isConfigured = supabase.supabaseUrl && !supabase.supabaseUrl.includes('your-project');
 
-    console.log("Attempting Google Login...");
-    console.log("Supabase URL:", supabase.supabaseUrl);
-    
-    if (!supabase.supabaseUrl || supabase.supabaseUrl.includes('your-project')) {
-      alert("Configuration Error: NEXT_PUBLIC_SUPABASE_URL is not set correctly in .env.local");
+    if (!isConfigured) {
+      console.log("Supabase not configured. Entering Mock Login mode...");
+      alert("Demo Mode: Supabase keys not found in .env.local. Logging you in as a Mock Google User for demo purposes.");
+      handleGuestLogin(); // Reuse guest login logic for mock success
       return;
     }
 
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
-        options: {
-          redirectTo: window.location.origin
-        }
+        options: { redirectTo: window.location.origin }
       });
-      if (error) {
-        console.error("Supabase OAuth Error:", error.message);
-        alert(`Login Error: ${error.message}`);
-      }
+      if (error) alert(`Login Error: ${error.message}`);
     } catch (err) {
-      console.error("Unexpected error during Google login:", err);
-      alert(`Unexpected Error: ${err.message || 'Check console for details'}`);
+      alert(`Unexpected Error: ${err.message}`);
     }
   };
 
   const handleGitHubLogin = async () => {
+    const isConfigured = supabase.supabaseUrl && !supabase.supabaseUrl.includes('your-project');
+
+    if (!isConfigured) {
+      alert("Demo Mode: Supabase keys not found. Logging you in as a Mock GitHub User.");
+      handleGuestLogin();
+      return;
+    }
+
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
-        options: {
-          redirectTo: window.location.origin
-        }
+        options: { redirectTo: window.location.origin }
       });
-      if (error) {
-        console.error("GitHub Login Error:", error.message);
-        alert(`Login Error: ${error.message}`);
-      }
+      if (error) alert(`Login Error: ${error.message}`);
     } catch (err) {
-      console.error("Unexpected error during GitHub login:", err);
-      alert(`Unexpected Error: ${err.message || 'Check console for details'}`);
+      alert(`Unexpected Error: ${err.message}`);
     }
   };
+
 
   const handleGuestLogin = () => {
     alert("Welcome! You are now browsing as a Guest. Note: Your progress will not be synced.");
