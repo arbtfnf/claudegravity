@@ -9,6 +9,7 @@ export default function Navbar() {
         <div style={styles.links}>
           <Link href="/" style={styles.link}>Feed</Link>
           <Link href="/initiatives" style={styles.link}>Initiatives</Link>
+          <Link href="/mood-protocol" style={styles.link}>Mood Protocol</Link>
           <Link href="/tech" style={styles.link}>Tech</Link>
           <Link href="/ai-editor" style={styles.link}>Editor</Link>
         </div>

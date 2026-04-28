@@ -73,6 +73,11 @@ h1, h2, h3, .heading-font {
   100% { transform: rotate(60deg); }
 }
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* Glassmorphism */
 .glass {
   background: var(--glass-bg);

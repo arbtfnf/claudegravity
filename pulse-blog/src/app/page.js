@@ -2,12 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import BlogCard from '@/components/BlogCard';
 
-async function getPosts() {
-  const res = await fetch('http://localhost:3000/api/posts', { cache: 'no-store' });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return data.posts;
-}
+import { getPosts } from '@/lib/data';
 
 export default async function Home() {
   const posts = await getPosts();

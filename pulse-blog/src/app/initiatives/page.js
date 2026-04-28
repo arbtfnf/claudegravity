@@ -6,11 +6,11 @@ export const metadata = {
   description: "Browse our active initiatives in social, progressive, and responsible categories.",
 };
 
+import { getPosts } from '@/lib/data';
+
 async function getInitiatives() {
-  const res = await fetch('http://localhost:3000/api/posts', { cache: 'no-store' });
-  if (!res.ok) return [];
-  const data = await res.json();
-  return data.posts.filter(p => p.category !== 'Tech');
+  const posts = await getPosts();
+  return posts.filter(p => p.category !== 'Tech');
 }
 
 export default async function InitiativesPage() {
