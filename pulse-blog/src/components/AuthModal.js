@@ -3,8 +3,35 @@ import { useState } from 'react';
 
 export default function AuthModal({ isOpen, onClose }) {
   const [isLogin, setIsLogin] = useState(true);
+  const [prank, setPrank] = useState(false);
 
-  if (!isOpen) return null;
+  if (!isOpen) {
+    if (prank) setPrank(false); // Reset prank if modal closed
+    return null;
+  }
+
+  if (prank) {
+    return (
+      <div style={{...styles.overlay, zIndex: 10000}}>
+        <div style={styles.prankModal} className="prank-anim">
+          <h1 style={{ fontSize: '48px', color: '#ff0050', marginBottom: '20px', textShadow: '0 0 10px rgba(255,0,80,0.8)' }}>
+            🚨 CAUGHT YOU! 🚨
+          </h1>
+          <p style={{ fontSize: '20px', lineHeight: '1.5', color: 'white' }}>
+            Pulse is about <strong>action</strong> and <strong>focus</strong>. <br /><br />
+            We do not support algorithmic doom-scrolling!<br />
+            Return to the real world!
+          </p>
+          <button 
+            style={{ ...styles.submitBtn, background: 'black', color: '#00f2fe', border: '2px solid #00f2fe', marginTop: '40px' }} 
+            onClick={() => setPrank(false)}
+          >
+            I'm sorry. Take me back.
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={styles.overlay} className="fade-in">
@@ -18,6 +45,21 @@ export default function AuthModal({ isOpen, onClose }) {
               ? "Log in to sync your progress across the Matrix and Psyche Eval." 
               : "Create a free, non-mandatory account to track your impact."}
           </p>
+        </div>
+
+        <div style={styles.socialAuth}>
+          <button style={styles.googleBtn}>
+            <span style={{marginRight: '10px'}}>🌐</span> Continue with Google
+          </button>
+          <button style={styles.tiktokBtn} onClick={() => setPrank(true)}>
+            <span style={{marginRight: '10px'}}>🎵</span> Continue with TikTok
+          </button>
+        </div>
+
+        <div style={styles.divider}>
+          <div style={styles.line}></div>
+          <span style={styles.dividerText}>or</span>
+          <div style={styles.line}></div>
         </div>
 
         <form style={styles.form} onSubmit={(e) => { e.preventDefault(); onClose(); }}>
@@ -72,11 +114,21 @@ const styles = {
     width: '90%',
     display: 'flex',
     flexDirection: 'column',
-    gap: '25px',
+    gap: '20px',
     border: '1px solid var(--accent-secondary)',
     background: 'rgba(5, 5, 5, 0.95)',
     boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
     position: 'relative',
+    maxHeight: '90vh',
+    overflowY: 'auto',
+  },
+  prankModal: {
+    padding: '60px',
+    borderRadius: '24px',
+    maxWidth: '600px',
+    textAlign: 'center',
+    border: '4px solid #ff0050',
+    background: '#111',
   },
   closeBtn: {
     position: 'absolute',
@@ -101,6 +153,54 @@ const styles = {
     fontSize: '14px',
     color: 'var(--text-secondary)',
     lineHeight: '1.5',
+  },
+  socialAuth: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    marginTop: '5px',
+  },
+  googleBtn: {
+    background: 'white',
+    color: 'black',
+    border: 'none',
+    padding: '12px',
+    borderRadius: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tiktokBtn: {
+    background: 'linear-gradient(90deg, #ff0050 0%, #00f2fe 100%)',
+    color: 'white',
+    border: 'none',
+    padding: '12px',
+    borderRadius: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  divider: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '15px',
+    margin: '5px 0',
+  },
+  line: {
+    flex: 1,
+    height: '1px',
+    background: 'rgba(255,255,255,0.1)',
+  },
+  dividerText: {
+    color: 'var(--text-secondary)',
+    fontSize: '14px',
+    textTransform: 'uppercase',
   },
   form: {
     display: 'flex',
@@ -138,15 +238,14 @@ const styles = {
     fontSize: '16px',
     fontWeight: 'bold',
     cursor: 'pointer',
-    marginTop: '10px',
+    marginTop: '5px',
   },
   footer: {
     display: 'flex',
     justifyContent: 'center',
     gap: '10px',
     fontSize: '14px',
-    marginTop: '10px',
-    paddingTop: '20px',
+    paddingTop: '15px',
     borderTop: '1px solid rgba(255,255,255,0.1)',
   },
   footerText: {

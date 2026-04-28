@@ -148,3 +148,15 @@ h1, h2, h3, .heading-font {
   animation: pulse-anim 2s infinite;
 }
 
+@keyframes prank-shake {
+  0% { transform: scale(1) rotate(0deg); box-shadow: 0 0 50px rgba(255,0,80,0); }
+  25% { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 50px rgba(255,0,80,0.5); }
+  50% { transform: scale(0.95) rotate(-2deg); box-shadow: 0 0 50px rgba(0,242,254,0.5); }
+  75% { transform: scale(1.05) rotate(2deg); box-shadow: 0 0 50px rgba(255,0,80,0.5); }
+  100% { transform: scale(1) rotate(0deg); box-shadow: 0 0 50px rgba(255,0,80,0); }
+}
+.prank-anim {
+  animation: prank-shake 0.3s infinite;
+}
+
+
