@@ -9,6 +9,7 @@ export default function Navbar() {
         <div style={styles.links}>
           <Link href="/initiatives" style={styles.link}>Initiatives</Link>
           <Link href="/mood-protocol" style={styles.link}>Mood Simulator</Link>
+          <Link href="/psyche" style={styles.link}>Psyche Eval</Link>
           <Link href="/tech" style={styles.link}>Tech Challenge</Link>
         </div>
       </div>
