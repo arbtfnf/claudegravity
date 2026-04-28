@@ -10,16 +10,6 @@ export default function AuthModal({ isOpen, onClose }) {
   const [name, setName] = useState('');
 
   const handleGoogleLogin = async () => {
-    // Check if Supabase is configured
-    const isConfigured = supabase.supabaseUrl && !supabase.supabaseUrl.includes('your-project');
-
-    if (!isConfigured) {
-      console.log("Supabase not configured. Entering Mock Login mode...");
-      alert("Demo Mode: Supabase keys not found in .env.local. Logging you in as a Mock Google User for demo purposes.");
-      handleGuestLogin(); // Reuse guest login logic for mock success
-      return;
-    }
-
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -32,14 +22,6 @@ export default function AuthModal({ isOpen, onClose }) {
   };
 
   const handleGitHubLogin = async () => {
-    const isConfigured = supabase.supabaseUrl && !supabase.supabaseUrl.includes('your-project');
-
-    if (!isConfigured) {
-      alert("Demo Mode: Supabase keys not found. Logging you in as a Mock GitHub User.");
-      handleGuestLogin();
-      return;
-    }
-
     try {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
@@ -50,6 +32,7 @@ export default function AuthModal({ isOpen, onClose }) {
       alert(`Unexpected Error: ${err.message}`);
     }
   };
+
 
 
   const handleGuestLogin = () => {
