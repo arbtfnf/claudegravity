@@ -1,9 +1,88 @@
 'use client';
 import { useState } from 'react';
+import { supabase } from '../lib/supabaseClient';
 
 export default function AuthModal({ isOpen, onClose }) {
   const [isLogin, setIsLogin] = useState(true);
   const [prank, setPrank] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+
+  const handleGoogleLogin = async () => {
+
+    console.log("Attempting Google Login...");
+    console.log("Supabase URL:", supabase.supabaseUrl);
+    
+    if (!supabase.supabaseUrl || supabase.supabaseUrl.includes('your-project')) {
+      alert("Configuration Error: NEXT_PUBLIC_SUPABASE_URL is not set correctly in .env.local");
+      return;
+    }
+
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+      if (error) {
+        console.error("Supabase OAuth Error:", error.message);
+        alert(`Login Error: ${error.message}`);
+      }
+    } catch (err) {
+      console.error("Unexpected error during Google login:", err);
+      alert(`Unexpected Error: ${err.message || 'Check console for details'}`);
+    }
+  };
+
+  const handleGitHubLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+        options: {
+          redirectTo: window.location.origin
+        }
+      });
+      if (error) {
+        console.error("GitHub Login Error:", error.message);
+        alert(`Login Error: ${error.message}`);
+      }
+    } catch (err) {
+      console.error("Unexpected error during GitHub login:", err);
+      alert(`Unexpected Error: ${err.message || 'Check console for details'}`);
+    }
+  };
+
+  const handleGuestLogin = () => {
+    alert("Welcome! You are now browsing as a Guest. Note: Your progress will not be synced.");
+    onClose();
+  };
+
+  const handleEmailAuth = async (e) => {
+
+    e.preventDefault();
+    try {
+      if (isLogin) {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) throw error;
+        alert("Logged in successfully!");
+      } else {
+        const { error } = await supabase.auth.signUp({ 
+          email, 
+          password,
+          options: { data: { full_name: name } }
+        });
+        if (error) throw error;
+        alert("Sign up successful! Check your email for verification.");
+      }
+      onClose();
+    } catch (err) {
+      alert(`Auth Error: ${err.message}`);
+    }
+  };
+
+
 
   if (!isOpen) {
     if (prank) setPrank(false); // Reset prank if modal closed
@@ -48,13 +127,27 @@ export default function AuthModal({ isOpen, onClose }) {
         </div>
 
         <div style={styles.socialAuth}>
-          <button style={styles.googleBtn}>
+          <button style={styles.guestBtn} onClick={handleGuestLogin}>
+            <span style={{marginRight: '10px'}}>👤</span> Continue as Guest (No Setup Required)
+          </button>
+          <div style={styles.divider}>
+            <div style={styles.line}></div>
+            <span style={styles.dividerText}>or use social</span>
+            <div style={styles.line}></div>
+          </div>
+          <button style={styles.googleBtn} onClick={handleGoogleLogin}>
             <span style={{marginRight: '10px'}}>🌐</span> Continue with Google
+          </button>
+          <button style={styles.githubBtn} onClick={handleGitHubLogin}>
+            <span style={{marginRight: '10px'}}>🐙</span> Continue with GitHub
           </button>
           <button style={styles.tiktokBtn} onClick={() => setPrank(true)}>
             <span style={{marginRight: '10px'}}>🎵</span> Continue with TikTok
           </button>
         </div>
+
+
+
 
         <div style={styles.divider}>
           <div style={styles.line}></div>
@@ -62,26 +155,48 @@ export default function AuthModal({ isOpen, onClose }) {
           <div style={styles.line}></div>
         </div>
 
-        <form style={styles.form} onSubmit={(e) => { e.preventDefault(); onClose(); }}>
+        <form style={styles.form} onSubmit={handleEmailAuth}>
           {!isLogin && (
             <div style={styles.inputGroup}>
               <label style={styles.label}>Name</label>
-              <input type="text" style={styles.input} placeholder="Jane Doe" required />
+              <input 
+                type="text" 
+                style={styles.input} 
+                placeholder="Jane Doe" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required 
+              />
             </div>
           )}
           <div style={styles.inputGroup}>
             <label style={styles.label}>Email</label>
-            <input type="email" style={styles.input} placeholder="jane@example.com" required />
+            <input 
+              type="email" 
+              style={styles.input} 
+              placeholder="jane@example.com" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required 
+            />
           </div>
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
-            <input type="password" style={styles.input} placeholder="••••••••" required />
+            <input 
+              type="password" 
+              style={styles.input} 
+              placeholder="••••••••" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required 
+            />
           </div>
 
           <button type="submit" style={styles.submitBtn}>
             {isLogin ? "Log In" : "Sign Up"}
           </button>
         </form>
+
 
         <div style={styles.footer}>
           <span style={styles.footerText}>
@@ -173,6 +288,24 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  guestBtn: {
+    background: 'var(--accent-primary)',
+    color: 'white',
+    border: 'none',
+    padding: '15px',
+    borderRadius: '12px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '10px',
+    boxShadow: '0 4px 15px rgba(168, 85, 247, 0.4)',
+    transition: 'transform 0.2s',
+  },
+
+
   tiktokBtn: {
     background: 'linear-gradient(90deg, #ff0050 0%, #00f2fe 100%)',
     color: 'white',
@@ -186,6 +319,20 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
   },
+  githubBtn: {
+    background: '#24292e',
+    color: 'white',
+    border: 'none',
+    padding: '12px',
+    borderRadius: '10px',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
   divider: {
     display: 'flex',
     alignItems: 'center',

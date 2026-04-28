@@ -1,0 +1,72 @@
+Retrieving project…
+Deploying anuragbandhu007-8363s-projects/pulse-blog
+Uploading [--------------------] (0.0B/14.9KB)
+Uploading [=========-----------] (7.0KB/14.9KB)
+Uploading [==============------] (10.9KB/14.9KB)
+Uploading [====================] (14.9KB/14.9KB)
+Inspect: https://vercel.com/anuragbandhu007-8363s-projects/pulse-blog/Aas1Kwi3YvHtC88pWPpL1kiM6k99 [3s]
+Production: https://pulse-blog-37rj2v3tj-anuragbandhu007-8363s-projects.vercel.app [3s]
+https://pulse-blog-37rj2v3tj-anuragbandhu007-8363s-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 69 deployment files...
+Building: Restored build cache from previous deployment (4AS3RuGLTM2Nhnrefks4k8tJBbYC)
+Building: Running "vercel build"
+Building: Vercel CLI 51.6.1
+Building: Installing dependencies...
+Building: up to date in 606ms
+Building: 3 packages are looking for funding
+Building: run `npm fund` for details
+Building: Detected Next.js version: 13.5.6
+Building: Running "npm run build"
+Building: > aether-blog@0.1.0 build
+Building: > next build
+Building: Creating an optimized production build ...
+Building: ✓ Compiled successfully
+Building: Linting and checking validity of types ...
+Building: Collecting page data ...
+Building: Generating static pages (0/19) ...
+Building: Generating static pages (4/19)
+Building: Generating static pages (9/19)
+Building: Generating static pages (14/19)
+Building: ✓ Generating static pages (19/19)
+Building: Finalizing page optimization ...
+Building: Collecting build traces ...
+Building: Route (app)                              Size     First Load JS
+Building: ┌ ○ /                                    192 B            91 kB
+Building: ├ ○ /_not-found                          875 B          81.4 kB
+Building: ├ ○ /ai-editor                           1.89 kB        92.7 kB
+Building: ├ λ /api/mood/generate-game              0 B                0 B
+Building: ├ ○ /api/mood/generate-quiz              0 B                0 B
+Building: ├ ○ /api/posts                           0 B                0 B
+Building: ├ λ /api/psyche                          0 B                0 B
+Building: ├ ○ /api/tech-challenge                  0 B                0 B
+Building: ├ λ /api/video-generator                 0 B                0 B
+Building: ├ ○ /initiatives                         192 B            91 kB
+Building: ├ ○ /mood-protocol                       2.53 kB        93.4 kB
+Building: ├ ○ /posts/future-of-ai                  786 B          91.6 kB
+Building: ├ ○ /posts/healthcare-revolution         3.06 kB        93.9 kB
+Building: ├ ○ /psyche                              1.85 kB        92.7 kB
+Building: ├ ○ /tech                                1.52 kB        92.3 kB
+Building: └ ○ /tech/scaling-referral-systems       3.06 kB        93.9 kB
+Building: + First Load JS shared by all            80.5 kB
+Building: ├ chunks/472-4e2e57b95d647320.js       27.5 kB
+Building: ├ chunks/fd9d1056-16f14d1599bb12d9.js  51.1 kB
+Building: ├ chunks/main-app-892c3dff08e9cd4c.js  231 B
+Building: └ chunks/webpack-5bdf45631504d1cd.js   1.73 kB
+Building: λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+Building: ○  (Static)  automatically rendered as static HTML (uses no initial props)
+Building: Traced Next.js server files in: 469.212ms
+Building: Created all serverless functions in: 498.365ms
+Building: Collected static files (public/, static/, .next/static): 6.103ms
+Building: Build Completed in /vercel/output [18s]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://pulse-blog-37rj2v3tj-anuragbandhu007-8363s-projects.vercel.app [35s]
+Completing...
+Aliased: https://pulse-blog-phi.vercel.app [35s]
+
+Common next commands:
+- `vercel inspect pulse-blog-37rj2v3tj-anuragbandhu007-8363s-projects.vercel.app --logs`
+- `vercel redeploy pulse-blog-37rj2v3tj-anuragbandhu007-8363s-projects.vercel.app`
