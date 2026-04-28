@@ -6,7 +6,9 @@ export default function MoodQuiz({ onComplete }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [currentInput, setCurrentInput] = useState('');
+  
+  // currentInput is an array to support multi-select easily
+  const [currentInput, setCurrentInput] = useState([]);
 
   useEffect(() => {
     fetch('/api/mood/generate-quiz')
@@ -17,12 +19,25 @@ export default function MoodQuiz({ onComplete }) {
       });
   }, []);
 
+  const currentQ = questions[currentIndex];
+
+  const toggleOption = (opt) => {
+    if (currentQ.type === 'multi') {
+      setCurrentInput(prev => 
+        prev.includes(opt) ? prev.filter(o => o !== opt) : [...prev, opt]
+      );
+    } else {
+      // Single select instantly replaces the array
+      setCurrentInput([opt]);
+    }
+  };
+
   const handleNext = () => {
-    if (!currentInput.trim()) return;
+    if (currentInput.length === 0) return;
     
-    const newAnswers = [...answers, { q: questions[currentIndex], a: currentInput }];
+    const newAnswers = [...answers, { q: currentQ.q, a: currentInput }];
     setAnswers(newAnswers);
-    setCurrentInput('');
+    setCurrentInput([]); // Reset for next question
     
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -38,22 +53,37 @@ export default function MoodQuiz({ onComplete }) {
       <div style={styles.progress}>
         Question {currentIndex + 1} of {questions.length}
       </div>
-      <h2 style={styles.question}>{questions[currentIndex]}</h2>
       
-      <input 
-        type="text" 
-        style={styles.input}
-        value={currentInput}
-        onChange={(e) => setCurrentInput(e.target.value)}
-        placeholder="Type your answer..."
-        onKeyDown={(e) => e.key === 'Enter' && handleNext()}
-        autoFocus
-      />
+      <div style={styles.questionHeader}>
+        <h2 style={styles.question}>{currentQ.q}</h2>
+        {currentQ.type === 'multi' && (
+          <span style={styles.hint}>Select all that apply</span>
+        )}
+      </div>
+      
+      <div style={styles.optionsGrid}>
+        {currentQ.options.map(opt => {
+          const isSelected = currentInput.includes(opt);
+          return (
+            <button 
+              key={opt}
+              style={{
+                ...styles.optionBtn, 
+                borderColor: isSelected ? 'var(--accent-primary)' : 'rgba(255,255,255,0.1)',
+                background: isSelected ? 'rgba(168, 85, 247, 0.1)' : 'rgba(0,0,0,0.5)'
+              }}
+              onClick={() => toggleOption(opt)}
+            >
+              {opt}
+            </button>
+          );
+        })}
+      </div>
       
       <button 
-        style={{...styles.button, opacity: currentInput.trim() ? 1 : 0.5}} 
+        style={{...styles.nextBtn, opacity: currentInput.length > 0 ? 1 : 0.5}} 
         onClick={handleNext}
-        disabled={!currentInput.trim()}
+        disabled={currentInput.length === 0}
       >
         {currentIndex === questions.length - 1 ? "Generate Protocol" : "Next →"}
       </button>
@@ -64,7 +94,7 @@ export default function MoodQuiz({ onComplete }) {
 const styles = {
   card: {
     padding: '40px',
-    maxWidth: '600px',
+    maxWidth: '650px',
     margin: '0 auto',
     display: 'flex',
     flexDirection: 'column',
@@ -76,23 +106,40 @@ const styles = {
     fontSize: '14px',
     textTransform: 'uppercase',
     letterSpacing: '2px',
+    fontWeight: 'bold',
+  },
+  questionHeader: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
   },
   question: {
     fontSize: '28px',
-    fontWeight: '300',
+    fontWeight: '600',
     lineHeight: '1.4',
   },
-  input: {
-    background: 'transparent',
-    border: 'none',
-    borderBottom: '2px solid rgba(255,255,255,0.1)',
-    color: 'white',
-    fontSize: '20px',
-    padding: '10px 0',
-    outline: 'none',
-    transition: 'border-color 0.3s',
+  hint: {
+    fontSize: '14px',
+    color: 'var(--text-secondary)',
+    fontStyle: 'italic',
   },
-  button: {
+  optionsGrid: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+  },
+  optionBtn: {
+    color: 'white',
+    padding: '16px 20px',
+    fontSize: '16px',
+    borderRadius: '12px',
+    border: '2px solid',
+    textAlign: 'left',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    fontWeight: '500',
+  },
+  nextBtn: {
     background: 'white',
     color: 'black',
     border: 'none',
@@ -103,6 +150,7 @@ const styles = {
     alignSelf: 'flex-start',
     borderRadius: '30px',
     transition: 'opacity 0.3s',
+    marginTop: '10px',
   },
   loader: {
     textAlign: 'center',
