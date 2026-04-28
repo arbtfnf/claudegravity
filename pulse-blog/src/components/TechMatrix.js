@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { fetchWithAuth } from '@/lib/apiClient';
 
 export default function TechMatrix() {
   const [questions, setQuestions] = useState([]);
@@ -7,6 +8,7 @@ export default function TechMatrix() {
   const [day, setDay] = useState(1);
   const [streak, setStreak] = useState(0);
   const [activeQuestion, setActiveQuestion] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Load from local storage

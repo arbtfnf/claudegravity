@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import { fetchWithAuth } from '@/lib/apiClient';
 
 export default function PsycheAssessment() {
   const [prompts, setPrompts] = useState([]);
@@ -11,7 +12,7 @@ export default function PsycheAssessment() {
   const [analysisResult, setAnalysisResult] = useState(null);
 
   useEffect(() => {
-    fetch('/api/psyche')
+    fetchWithAuth('/api/psyche')
       .then(res => res.json())
       .then(data => {
         setPrompts(data.prompts);

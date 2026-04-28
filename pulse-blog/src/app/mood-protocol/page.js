@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import MoodQuiz from '@/components/MoodQuiz';
 import MoodGame from '@/components/MoodGame';
+import { fetchWithAuth } from '@/lib/apiClient';
 
 export default function MoodProtocolPage() {
   const [gameState, setGameState] = useState(null);
@@ -11,11 +12,12 @@ export default function MoodProtocolPage() {
   const handleQuizComplete = async (answers) => {
     setLoadingGame(true);
     try {
-      const res = await fetch('/api/mood/generate-game', {
+      const res = await fetchWithAuth('/api/mood/generate-game', {
         method: 'POST',
         body: JSON.stringify({ answers })
       });
       const data = await res.json();
+
       setGameState(data.game);
     } catch (err) {
       console.error(err);
