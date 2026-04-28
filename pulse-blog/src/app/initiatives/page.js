@@ -3,7 +3,7 @@ import BlogCard from '@/components/BlogCard';
 
 export const metadata = {
   title: "Pulse Initiatives | Action-Oriented Change",
-  description: "Browse our active initiatives in social, progressive, and responsible categories.",
+  description: "Browse our active initiatives in medical, fitness, and social categories.",
 };
 
 import { getPosts } from '@/lib/data';
@@ -16,6 +16,13 @@ async function getInitiatives() {
 export default async function InitiativesPage() {
   const initiatives = await getInitiatives();
 
+  // Group initiatives by category
+  const groupedInitiatives = initiatives.reduce((acc, post) => {
+    if (!acc[post.category]) acc[post.category] = [];
+    acc[post.category].push(post);
+    return acc;
+  }, {});
+
   return (
     <>
       <Navbar />
@@ -25,11 +32,20 @@ export default async function InitiativesPage() {
           <p style={styles.subtitle}>Our community projects aimed at solving systemic challenges through technology and collective action.</p>
         </header>
         
-        <div style={styles.grid}>
-          {initiatives.map((post) => (
-            <BlogCard key={post.id} {...post} />
-          ))}
-        </div>
+        {Object.keys(groupedInitiatives).map(category => (
+          <section key={category} style={styles.section} className="fade-in">
+            <div style={styles.sectionHeader}>
+              <h2 style={styles.sectionTitle}>{category}</h2>
+              <div style={styles.line}></div>
+            </div>
+            
+            <div style={styles.grid}>
+              {groupedInitiatives[category].map((post) => (
+                <BlogCard key={post.id} {...post} />
+              ))}
+            </div>
+          </section>
+        ))}
       </main>
     </>
   );
@@ -59,6 +75,28 @@ const styles = {
     color: 'var(--text-secondary)',
     maxWidth: '600px',
     margin: '0 auto',
+  },
+  section: {
+    marginBottom: '80px',
+  },
+  sectionHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '30px',
+    marginBottom: '40px',
+  },
+  sectionTitle: {
+    fontSize: '24px',
+    textTransform: 'uppercase',
+    letterSpacing: '5px',
+    whiteSpace: 'nowrap',
+    fontWeight: '800',
+    color: 'var(--accent-primary)',
+  },
+  line: {
+    height: '1px',
+    background: 'var(--glass-border)',
+    flexGrow: 1,
   },
   grid: {
     display: 'grid',

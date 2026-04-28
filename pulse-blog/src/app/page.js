@@ -12,19 +12,6 @@ export default async function Home() {
       <Navbar />
       <main>
         <Hero />
-        
-        <section id="feed" style={styles.section}>
-          <div style={styles.sectionHeader}>
-            <h2 style={styles.sectionTitle}>The Pulse Feed</h2>
-            <div style={styles.line}></div>
-          </div>
-          
-          <div style={styles.grid}>
-            {posts.map((post) => (
-              <BlogCard key={post.id} {...post} />
-            ))}
-          </div>
-        </section>
 
         <footer style={styles.footer}>
           <p>&copy; 2026 PULSE. All rights reserved.</p>
