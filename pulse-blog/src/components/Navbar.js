@@ -7,16 +7,17 @@ export default function Navbar() {
       <div style={styles.left}>
         <div style={styles.logo} className="heading-font">PULSE</div>
         <div style={styles.links}>
-          <Link href="/" style={styles.link}>Feed</Link>
           <Link href="/initiatives" style={styles.link}>Initiatives</Link>
-          <Link href="/mood-protocol" style={styles.link}>Mood Protocol</Link>
-          <Link href="/tech" style={styles.link}>Tech</Link>
-          <Link href="/ai-editor" style={styles.link}>Editor</Link>
+          <Link href="/mood-protocol" style={styles.link}>Mood Simulator</Link>
+          <Link href="/tech" style={styles.link}>Tech Challenge</Link>
         </div>
       </div>
       <div style={styles.right}>
+        <Link href="/ai-editor" style={{ textDecoration: 'none' }}>
+          <button style={styles.editorBtn}>✨ AI Editor</button>
+        </Link>
         <a href="https://buymeacoffee.com" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
-          <button style={styles.coffeeBtn}>☕ Support Pulse</button>
+          <button style={styles.coffeeBtn}>☕ Support</button>
         </a>
         <CivilRating />
       </div>
@@ -76,6 +77,17 @@ const styles = {
     background: 'rgba(255, 215, 0, 0.1)',
     color: '#FFD700',
     border: '1px solid rgba(255, 215, 0, 0.3)',
+    padding: '8px 15px',
+    borderRadius: '20px',
+    fontWeight: '700',
+    cursor: 'pointer',
+    fontSize: '12px',
+    transition: 'var(--transition)',
+  },
+  editorBtn: {
+    background: 'rgba(168, 85, 247, 0.1)',
+    color: 'var(--accent-primary)',
+    border: '1px solid rgba(168, 85, 247, 0.3)',
     padding: '8px 15px',
     borderRadius: '20px',
     fontWeight: '700',

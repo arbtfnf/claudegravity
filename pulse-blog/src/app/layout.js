@@ -1,6 +1,7 @@
 "use client";
 import { useEffect } from 'react';
 import "./globals.css";
+import MoodCheckinPopup from '@/components/MoodCheckinPopup';
 
 export default function RootLayout({ children }) {
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body style={{ backgroundColor: 'black' }}>
         {children}
+        <MoodCheckinPopup />
       </body>
     </html>
   );

@@ -1,0 +1,69 @@
+Retrieving project…
+Deploying anuragbandhu007-8363s-projects/pulse-blog
+Uploading [--------------------] (0.0B/9.6KB)
+Uploading [========------------] (3.9KB/9.6KB)
+Uploading [===========---------] (5.6KB/9.6KB)
+Uploading [====================] (9.6KB/9.6KB)
+Inspect: https://vercel.com/anuragbandhu007-8363s-projects/pulse-blog/Ao7WsR1XK3E1HPUEQk2AAH5AUWXF [3s]
+Production: https://pulse-blog-ipl39u18z-anuragbandhu007-8363s-projects.vercel.app [3s]
+https://pulse-blog-ipl39u18z-anuragbandhu007-8363s-projects.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Downloading 57 deployment files...
+Building: Restored build cache from previous deployment (2sSgGuV1XPU3bN76vMBAoKnrhkmT)
+Building: Running "vercel build"
+Building: Vercel CLI 51.6.1
+Building: Installing dependencies...
+Building: up to date in 601ms
+Building: 3 packages are looking for funding
+Building: run `npm fund` for details
+Building: Detected Next.js version: 13.5.6
+Building: Running "npm run build"
+Building: > aether-blog@0.1.0 build
+Building: > next build
+Building: Creating an optimized production build ...
+Building: ✓ Compiled successfully
+Building: Linting and checking validity of types ...
+Building: Collecting page data ...
+Building: Generating static pages (0/16) ...
+Building: Generating static pages (4/16)
+Building: Generating static pages (8/16)
+Building: Generating static pages (12/16)
+Building: ✓ Generating static pages (16/16)
+Building: Finalizing page optimization ...
+Building: Collecting build traces ...
+Building: Route (app)                              Size     First Load JS
+Building: ┌ ○ /                                    181 B          87.7 kB
+Building: ├ ○ /_not-found                          875 B          81.4 kB
+Building: ├ ○ /ai-editor                           2.38 kB        89.9 kB
+Building: ├ λ /api/mood/generate-game              0 B                0 B
+Building: ├ ○ /api/mood/generate-quiz              0 B                0 B
+Building: ├ ○ /api/posts                           0 B                0 B
+Building: ├ λ /api/video-generator                 0 B                0 B
+Building: ├ ○ /initiatives                         181 B          87.7 kB
+Building: ├ ○ /mood-protocol                       3.89 kB        91.4 kB
+Building: ├ ○ /posts/future-of-ai                  1.27 kB        88.8 kB
+Building: ├ ○ /posts/healthcare-revolution         3.55 kB          91 kB
+Building: ├ ○ /tech                                181 B          87.7 kB
+Building: └ ○ /tech/scaling-referral-systems       3.55 kB          91 kB
+Building: + First Load JS shared by all            80.5 kB
+Building: ├ chunks/472-4e2e57b95d647320.js       27.5 kB
+Building: ├ chunks/fd9d1056-16f14d1599bb12d9.js  51.1 kB
+Building: ├ chunks/main-app-892c3dff08e9cd4c.js  231 B
+Building: └ chunks/webpack-89606575d07795c3.js   1.73 kB
+Building: λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
+Building: ○  (Static)  automatically rendered as static HTML (uses no initial props)
+Building: Traced Next.js server files in: 535.533ms
+Building: Created all serverless functions in: 425.908ms
+Building: Collected static files (public/, static/, .next/static): 6.422ms
+Building: Build Completed in /vercel/output [18s]
+Building: Deploying outputs...
+[2K[1A[2K[GProduction: https://pulse-blog-ipl39u18z-anuragbandhu007-8363s-projects.vercel.app [35s]
+Completing...
+Aliased: https://pulse-blog-phi.vercel.app [35s]
+
+Common next commands:
+- `vercel inspect pulse-blog-ipl39u18z-anuragbandhu007-8363s-projects.vercel.app --logs`
+- `vercel redeploy pulse-blog-ipl39u18z-anuragbandhu007-8363s-projects.vercel.app`
