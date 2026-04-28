@@ -1,34 +1,23 @@
 import Navbar from '@/components/Navbar';
-import BlogCard from '@/components/BlogCard';
+import TechMatrix from '@/components/TechMatrix';
 
 export const metadata = {
-  title: "Pulse Tech | Engineering for Impact",
-  description: "Deep-dives into the architecture and challenges of scaling social technology.",
+  title: "Pulse Tech | Daily Matrix Challenge",
+  description: "A gamified hub for HLD, LLD, OOPS, and DSA software engineering challenges.",
 };
 
-import { getPosts } from '@/lib/data';
-
-async function getTechPosts() {
-  const posts = await getPosts();
-  return posts.filter(p => p.category === 'Tech');
-}
-
-export default async function TechPage() {
-  const techPosts = await getTechPosts();
-
+export default function TechPage() {
   return (
     <>
       <Navbar />
       <main style={styles.main}>
         <header style={styles.header} className="fade-in">
-          <h1 style={styles.title}>Tech <span style={styles.accent}>Challenges</span></h1>
-          <p style={styles.subtitle}>Engineering solutions for information liquidity and decentralized trust in fragmented markets.</p>
+          <h1 style={styles.title}>Tech <span style={styles.accent}>Matrix</span></h1>
+          <p style={styles.subtitle}>Unlock engineering concepts sequentially. Build your streak, expand your matrix.</p>
         </header>
         
-        <div style={styles.grid}>
-          {techPosts.map((post) => (
-            <BlogCard key={post.id} {...post} />
-          ))}
+        <div className="reveal">
+          <TechMatrix />
         </div>
       </main>
     </>
@@ -52,17 +41,12 @@ const styles = {
     marginBottom: '20px',
   },
   accent: {
-    color: 'var(--accent-primary)',
+    color: 'var(--accent-secondary)',
   },
   subtitle: {
     fontSize: '18px',
     color: 'var(--text-secondary)',
     maxWidth: '600px',
     margin: '0 auto',
-  },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: '40px',
   }
 };

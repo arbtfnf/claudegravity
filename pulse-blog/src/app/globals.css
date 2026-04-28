@@ -103,3 +103,48 @@ h1, h2, h3, .heading-font {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-primary);
 }
+
+/* Tech Matrix Nodes */
+.matrix-box {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 14px;
+}
+.matrix-box.locked {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.2);
+  cursor: not-allowed;
+}
+.matrix-box.unlocked {
+  background: rgba(6, 182, 212, 0.1);
+  border: 2px solid var(--accent-secondary);
+  color: var(--accent-secondary);
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
+}
+.matrix-box.unlocked:hover {
+  transform: scale(1.1) translateY(-5px);
+  background: rgba(6, 182, 212, 0.2);
+}
+.matrix-box.solved {
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border: 1px solid transparent;
+  color: white;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+}
+
+@keyframes pulse-anim {
+  0% { transform: scale(1); box-shadow: 0 0 0 rgba(6, 182, 212, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(6, 182, 212, 0.2); }
+  100% { transform: scale(1); box-shadow: 0 0 0 rgba(6, 182, 212, 0.4); }
+}
+.pulse-anim {
+  animation: pulse-anim 2s infinite;
+}
+
