@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bikesNbeans in BLR — 100+ Epic Rides & Pit Stops Near Bangalore</title>
+  <meta name="description" content="Discover the best biker routes, scenic rides, and pit stops near Bangalore. 100+ curated destinations for bikers, cars, families, and offbeat explorers." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="cursor-glow"></div>
+  <nav id="navbar">
+    <div class="nav-brand">
+      <span class="logo-icon">🏍️</span>
+      <span class="logo-text">bikes<span class="accent">N</span>beans <span class="blr">in BLR</span></span>
+    </div>
+    <div class="nav-stats">
+      <div class="stat"><span class="stat-num" id="total-count">0</span><span class="stat-label">Checkpoints</span></div>
+      <div class="stat"><span class="stat-num" id="filtered-count">0</span><span class="stat-label">In Sight</span></div>
+    </div>
+    <div class="nav-links">
+      <button id="show-exhausts" class="offbeat-btn" style="background:var(--accent); color:white; margin-right:10px;">EXHAUST LAB 🔥</button>
+      <button id="show-enthusiasts" class="offbeat-btn" style="background:var(--accent2); color:black; margin-right:10px;">ENTHUSIASTS 🏆</button>
+      <button id="offbeat-btn" class="offbeat-btn">FULL THROTTLE 🏁</button>
+    </div>
+  </nav>
+
+  <header id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="race-flag"></div>
+    <div class="exhaust-flames left"></div>
+    <div class="exhaust-flames right"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="line line-1">PEDAL TO THE</span>
+        <span class="line line-2"><span class="gradient-text">METAL</span></span>
+      </h1>
+      <p class="hero-sub">100+ EPIC RIDES • CARBON FIBER COFFEE • OFFROAD NIRVANA</p>
+      <div class="hero-search">
+        <span class="search-icon">⚡</span>
+        <input type="text" id="search-input" placeholder="SCANNING FOR ADVENTURE..." autocomplete="off" />
+      </div>
+    </div>
+    <div class="speedometer">
+      <div class="needle"></div>
+      <span class="rpm-text">REV IT UP</span>
+      <button id="nitro-btn">NITRO</button>
+    </div>
+  </header>
+
+  <section id="filters">
+    <div class="filter-bar">
+      <div class="filter-group" id="tag-filters">
+        <button class="filter-chip active" data-tag="all">🌟 All</button>
+        <button class="filter-chip" data-tag="bike">🏍️ Bike</button>
+        <button class="filter-chip" data-tag="car">🚗 Car</button>
+        <button class="filter-chip" data-tag="family">👨‍👩‍👧‍👦 Family</button>
+        <button class="filter-chip" data-tag="offbeat">🧭 Offbeat</button>
+        <button class="filter-chip" data-tag="food">🍕 Food</button>
+        <button class="filter-chip" data-tag="adventure">⛰️ Adventure</button>
+        <button class="filter-chip" data-tag="scenic">🌅 Scenic</button>
+        <button class="filter-chip" data-tag="heritage">🏛️ Heritage</button>
+      </div>
+      <div class="filter-group">
+        <select id="sort-select">
+          <option value="rating">⭐ Top Rated</option>
+          <option value="distance">📏 Nearest</option>
+          <option value="name">🔤 A-Z</option>
+        </select>
+      </div>
+      <div class="filter-group distance-group">
+        <label>KM RANGE:</label>
+        <input id="km-min" class="distance-input" type="number" value="0" />
+        <span>-</span>
+        <input id="km-max" class="distance-input" type="number" value="1000" />
+        <span id="km-label">0 - 1000 KM</span>
+      </div>
+    </div>
+  </section>
+
+  <main id="grid" class="card-grid"></main>
+
+  <section id="enthusiast-section" class="hidden">
+    <div class="carbon-header">
+      <h2 style="font-family:'Black Ops One'; font-size:4rem; color:var(--accent2); text-align:center; padding:50px;">BENGALURU SUPERBIKE GARAGE</h2>
+    </div>
+    <div id="enthusiast-grid" class="card-grid"></div>
+  <section id="exhaust-section" class="hidden">
+    <div class="carbon-header" style="background: linear-gradient(to right, #000, #200, #000); border-bottom: 5px solid var(--accent);">
+      <h2 style="font-family:'Black Ops One'; font-size:4rem; color:var(--accent); text-align:center; padding:50px;">NITRO EXHAUST LAB</h2>
+    </div>
+    <div id="exhaust-grid" class="card-grid"></div>
+
+    <div class="metallurgy-blog">
+      <div class="blog-header">
+        <img src="/images/metallurgy.png" alt="Metallurgy Matters">
+        <div class="blog-title-overlay">
+          <h2>METALLURGY MATTERS</h2>
+          <p>THE SCIENCE OF THE SCREAM</p>
+        </div>
+      </div>
+      <div class="blog-content">
+        <div class="blog-grid">
+          <div class="blog-card">
+            <h3>THE HOLY QUARTET OF METALS</h3>
+            <ul>
+              <li><strong>Titanium (Grade 1-4):</strong> 40% lighter than steel. Turns blue/purple under heat. The MotoGP standard.</li>
+              <li><strong>Inconel:</strong> A superalloy that survives in jet engines. Retains strength at 1000°C+.</li>
+              <li><strong>Stainless Steel (304/316):</strong> The workhorse. Durable, corrosion-resistant, but heavy.</li>
+              <li><strong>Carbon Fiber:</strong> Used for mufflers and heat shields. Maximum weight saving and cool to the touch.</li>
+            </ul>
+          </div>
+          <div class="blog-card">
+            <h3>WHY METALLURGY CHANGES EVERYTHING</h3>
+            <p>It's not just about weight. Thinner titanium walls (0.6mm - 1mm) vibrate at higher frequencies, giving that iconic "F1-like" scream. Stainless steel, being denser, produces a deeper, bassier thrum.</p>
+            <p><strong>Heat Dissipation:</strong> Titanium sheds heat 3x faster than steel, meaning your exhaust is cold to the touch minutes after a hard ride.</p>
+          </div>
+          <div class="blog-card accent-card">
+            <h3>HOW TO MINT YOUR OWN EXHAUST</h3>
+            <p>Custom 'minting' a system requires precision <strong>TIG Welding</strong> with <strong>Argon Purging</strong> to prevent oxidation inside the pipe.</p>
+            <ol>
+              <li><strong>Design:</strong> Use 3D scanning to map your bike's header ports.</li>
+              <li><strong>Bending:</strong> Mandrel bending ensures the inner diameter stays consistent for laminar gas flow.</li>
+              <li><strong>Welding:</strong> "Stack of dimes" welds are the hallmark of a master minter.</li>
+              <li><strong>Tuning:</strong> Pair with a Power Commander or ECU flash to 'mint' the perfect air-fuel ratio for the new flow.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close">✕</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <div id="tc-modal" class="modal-overlay hidden">
+    <div class="modal-card tc-card">
+      <button class="modal-close" id="tc-close">✕</button>
+      <div class="modal-body">
+        <h2 style="font-family:'Black Ops One'; color:var(--accent);">TERMS & CONDITIONS</h2>
+        <p>The statistics shown on this platform (Top Speed, Max RPM, Biker Names, etc.) are strictly for entertainment purposes.</p>
+        <p><strong>IMPORTANT:</strong> These stats were achieved by playing an online stimulation game and do NOT represent real-world conditions or legal driving limits.</p>
+        <p>Attempting to replicate these speeds on public roads is <strong>ILLEGAL, EXTREMELY DANGEROUS, and LIFE-THREATENING</strong>.</p>
+        <p>BikesNBeans does not promote or condone overspeeding. Ride safe, wear gear, and follow the law.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <p>Built with ☕ & 🔥 for the riding community • <a href="#" id="tc-link">Terms & Conditions</a></p>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
