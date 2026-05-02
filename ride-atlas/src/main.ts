@@ -1,6 +1,7 @@
 import { Place } from './data';
 import { Superbike } from './enthusiastData';
 import { Exhaust } from './exhaustData';
+import { supabase } from './supabase';
 import './style.css';
 
 const API_BASE = 'http://localhost:3001/api';
@@ -40,26 +41,108 @@ let minKm = 0;
 let maxKm = 1000;
 let showingEnthusiasts = false;
 let showingExhausts = false;
+let user: any = null;
+
+// --- DOM ELEMENTS ---
+const grid = document.getElementById('grid')!;
+const totalEl = document.getElementById('total-count')!;
+const filteredEl = document.getElementById('filtered-count')!;
+const enthusiastGrid = document.getElementById('enthusiast-grid')!;
+const enthusiastSection = document.getElementById('enthusiast-section')!;
+const exhaustGrid = document.getElementById('exhaust-grid')!;
+const exhaustSection = document.getElementById('exhaust-section')!;
+
+const authBtn = document.getElementById('auth-btn')!;
+const authModal = document.getElementById('auth-modal')!;
+const authClose = document.getElementById('auth-close')!;
+const authForm = document.getElementById('auth-form') as HTMLFormElement;
+const authMsg = document.getElementById('auth-msg')!;
 
 // --- DATA FETCHING ---
 async function fetchData() {
+  console.log("[NITRO] Fetching data from backend...");
   try {
     const [placesRes, bikesRes, exhaustsRes] = await Promise.all([
       fetch(`${API_BASE}/places`),
       fetch(`${API_BASE}/superbikes`),
       fetch(`${API_BASE}/exhausts`)
     ]);
+
+    if (!placesRes.ok || !bikesRes.ok || !exhaustsRes.ok) {
+      throw new Error("One or more API requests failed");
+    }
+
     allPlaces = await placesRes.json();
     allSuperbikes = await bikesRes.json();
     allExhausts = await exhaustsRes.json();
+    
+    console.log(`[NITRO] Data Loaded: ${allPlaces.length} places, ${allSuperbikes.length} bikes, ${allExhausts.length} exhausts`);
     
     renderCards();
     renderEnthusiasts();
     renderExhausts();
   } catch (err) {
     console.error("Failed to fetch data from NITRO server:", err);
+    grid.innerHTML = `<div class="error-msg" style="color:var(--accent); text-align:center; padding:50px; font-family:'Black Ops One';">⚠️ BACKEND OFFLINE. RESTRICTED THROTTLE.</div>`;
   }
 }
+
+// --- AUTH LOGIC ---
+async function handleAuth() {
+  const { data } = await supabase.auth.getSession();
+  user = data.session?.user;
+  updateAuthUI();
+
+  supabase.auth.onAuthStateChange((_event, session) => {
+    user = session?.user;
+    updateAuthUI();
+  });
+}
+
+function updateAuthUI() {
+  if (user) {
+    authBtn.textContent = `LOGOUT (${user.email.split('@')[0]}) 👤`;
+    authBtn.style.background = 'var(--accent)';
+    authBtn.style.color = 'white';
+  } else {
+    authBtn.textContent = 'LOGIN 👤';
+    authBtn.style.background = 'transparent';
+    authBtn.style.color = 'var(--accent)';
+  }
+}
+
+authBtn.addEventListener('click', async () => {
+  if (user) {
+    await supabase.auth.signOut();
+  } else {
+    authModal.classList.remove('hidden');
+  }
+});
+
+authClose.addEventListener('click', () => authModal.classList.add('hidden'));
+
+authForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = (document.getElementById('auth-email') as HTMLInputElement).value;
+  const password = (document.getElementById('auth-password') as HTMLInputElement).value;
+  
+  authMsg.textContent = "ENGAGING STARTER...";
+  
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  
+  if (error) {
+    // Try sign up if sign in fails (simple demo flow)
+    const { error: signUpError } = await supabase.auth.signUp({ email, password });
+    if (signUpError) {
+      authMsg.textContent = `CRITICAL FAILURE: ${signUpError.message}`;
+    } else {
+      authMsg.textContent = "ACCOUNT CREATED. CHECK EMAIL FOR NITRO LINK.";
+    }
+  } else {
+    authMsg.textContent = "LOGIN SUCCESSFUL. FULL THROTTLE!";
+    setTimeout(() => authModal.classList.add('hidden'), 1000);
+  }
+});
 
 // --- CURSOR GLOW ---
 const glow = document.getElementById('cursor-glow')!;
@@ -133,10 +216,6 @@ function getFiltered(): Place[] {
 }
 
 // --- RENDER CARDS ---
-const grid = document.getElementById('grid')!;
-const totalEl = document.getElementById('total-count')!;
-const filteredEl = document.getElementById('filtered-count')!;
-
 function renderCards() {
   const filtered = getFiltered();
   totalEl.textContent = String(allPlaces.length);
@@ -176,9 +255,6 @@ function renderCards() {
 }
 
 // --- RENDER ENTHUSIASTS ---
-const enthusiastGrid = document.getElementById('enthusiast-grid')!;
-const enthusiastSection = document.getElementById('enthusiast-section')!;
-
 function renderEnthusiasts() {
   enthusiastGrid.innerHTML = '';
   allSuperbikes.forEach((bike) => {
@@ -203,9 +279,6 @@ function renderEnthusiasts() {
 }
 
 // --- RENDER EXHAUSTS ---
-const exhaustGrid = document.getElementById('exhaust-grid')!;
-const exhaustSection = document.getElementById('exhaust-section')!;
-
 function renderExhausts() {
   exhaustGrid.innerHTML = '';
   allExhausts.forEach((ex) => {
@@ -378,6 +451,10 @@ document.getElementById('offbeat-btn')?.addEventListener('click', () => {
 document.getElementById('show-enthusiasts')?.addEventListener('click', () => {
   showingEnthusiasts = !showingEnthusiasts;
   if (showingEnthusiasts) {
+    showingExhausts = false;
+    exhaustSection.classList.add('hidden');
+    document.getElementById('show-exhausts')!.textContent = "EXHAUST LAB 🔥";
+
     enthusiastSection.classList.remove('hidden');
     renderEnthusiasts();
     enthusiastSection.scrollIntoView({ behavior: 'smooth' });
@@ -385,7 +462,6 @@ document.getElementById('show-enthusiasts')?.addEventListener('click', () => {
   } else {
     enthusiastSection.classList.add('hidden');
     document.getElementById('show-enthusiasts')!.textContent = "ENTHUSIASTS 🏆";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
@@ -393,6 +469,10 @@ document.getElementById('show-enthusiasts')?.addEventListener('click', () => {
 document.getElementById('show-exhausts')?.addEventListener('click', () => {
   showingExhausts = !showingExhausts;
   if (showingExhausts) {
+    showingEnthusiasts = false;
+    enthusiastSection.classList.add('hidden');
+    document.getElementById('show-enthusiasts')!.textContent = "ENTHUSIASTS 🏆";
+
     exhaustSection.classList.remove('hidden');
     renderExhausts();
     exhaustSection.scrollIntoView({ behavior: 'smooth' });
@@ -400,7 +480,6 @@ document.getElementById('show-exhausts')?.addEventListener('click', () => {
   } else {
     exhaustSection.classList.add('hidden');
     document.getElementById('show-exhausts')!.textContent = "EXHAUST LAB 🔥";
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 });
 
@@ -423,3 +502,4 @@ document.getElementById('nitro-btn')?.addEventListener('click', () => {
 
 // --- INIT ---
 fetchData();
+handleAuth();
