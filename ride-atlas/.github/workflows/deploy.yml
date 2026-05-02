@@ -1,0 +1,40 @@
+name: 🚀 Deploy to Oracle Cloud
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Pull latest code and restart server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Navigate to the project
+            cd bikesNbeans/ride-atlas || git clone https://github.com/arbtfnf/bikesNbeans.git && cd bikesNbeans/ride-atlas
+            
+            # Update Code
+            git pull origin main
+            
+            # Setup/Update Backend
+            cd ride-atlas-server
+            npm install
+            sudo npm install -g pm2 ts-node
+            pm2 delete nitro-api || true
+            pm2 start index.ts --interpreter ts-node --name "nitro-api"
+            
+            # Setup/Update Frontend
+            cd ..
+            npm install
+            npm run build
+            
+            # Final Firewall Punch
+            sudo iptables -I INPUT 6 -p tcp --dport 3001 -j ACCEPT
+            sudo netfilter-persistent save
+            
+            echo "🏁 NITRO DEPLOYMENT COMPLETE"
