@@ -4,7 +4,7 @@ import { Exhaust } from './exhaustData';
 import { supabase } from './supabase';
 import './style.css';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://144.24.157.65:3001/api';
 
 // --- AUDIO SYSTEM ---
 const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
