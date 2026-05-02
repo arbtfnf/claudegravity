@@ -22,6 +22,7 @@
       <div class="stat"><span class="stat-num" id="filtered-count">0</span><span class="stat-label">In Sight</span></div>
     </div>
     <div class="nav-links">
+      <button id="submit-ride-btn" class="offbeat-btn" style="background:var(--accent3); color:white; margin-right:10px;">SUBMIT RIDE ✍️</button>
       <button id="auth-btn" class="offbeat-btn" style="background:transparent; border:2px solid var(--accent); color:var(--accent); margin-right:10px;">LOGIN 👤</button>
       <button id="show-exhausts" class="offbeat-btn" style="background:var(--accent); color:white; margin-right:10px;">EXHAUST LAB 🔥</button>
       <button id="show-enthusiasts" class="offbeat-btn" style="background:var(--accent2); color:black; margin-right:10px;">ENTHUSIASTS 🏆</button>
@@ -168,6 +169,24 @@
           <button type="submit" id="auth-submit" class="map-btn" style="padding:20px; font-size:1.2rem;">ENGAGE 🏁</button>
         </form>
         <div id="auth-msg" style="margin-top:20px; text-align:center; font-size:0.8rem; color:var(--accent2);"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="submit-modal" class="modal-overlay hidden">
+    <div class="modal-card submission-card">
+      <button class="modal-close" id="submit-close">✕</button>
+      <div class="modal-body">
+        <h2 style="font-family:'Black Ops One'; color:var(--accent3); text-align:center;">MINT A NEW ROUTE</h2>
+        <p style="text-align:center; color:#888;">SHARE YOUR LEGENDARY RIDES WITH THE PACK</p>
+        <form id="ride-form" class="auth-form" style="display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:30px;">
+          <input type="text" id="ride-name" placeholder="ROUTE NAME (e.g. Nandi Night blast)" required style="grid-column: span 2; padding:15px; background:#222; border:1px solid #444; color:white;" />
+          <textarea id="ride-desc" placeholder="TELL THE STORY..." required style="grid-column: span 2; padding:15px; background:#222; border:1px solid #444; color:white; height:100px;"></textarea>
+          <input type="number" id="ride-dist" placeholder="DISTANCE (KM)" required style="padding:15px; background:#222; border:1px solid #444; color:white;" />
+          <input type="text" id="ride-tags" placeholder="TAGS (comma separated)" required style="padding:15px; background:#222; border:1px solid #444; color:white;" />
+          <button type="submit" id="ride-submit" class="map-btn" style="grid-column: span 2; padding:20px; font-size:1.2rem; background:var(--accent3);">SUBMIT FOR REVIEW 🏁</button>
+        </form>
+        <div id="submit-msg" style="margin-top:20px; text-align:center; font-size:0.8rem; color:var(--accent3);"></div>
       </div>
     </div>
   </div>

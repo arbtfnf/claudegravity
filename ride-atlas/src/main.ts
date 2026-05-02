@@ -58,6 +58,12 @@ const authClose = document.getElementById('auth-close')!;
 const authForm = document.getElementById('auth-form') as HTMLFormElement;
 const authMsg = document.getElementById('auth-msg')!;
 
+const submitRideBtn = document.getElementById('submit-ride-btn')!;
+const submitModal = document.getElementById('submit-modal')!;
+const submitClose = document.getElementById('submit-close')!;
+const rideForm = document.getElementById('ride-form') as HTMLFormElement;
+const submitMsg = document.getElementById('submit-msg')!;
+
 // --- DATA FETCHING ---
 async function fetchData() {
   console.log("[NITRO] Fetching data from backend...");
@@ -131,7 +137,6 @@ authForm.addEventListener('submit', async (e) => {
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   
   if (error) {
-    // Try sign up if sign in fails (simple demo flow)
     const { error: signUpError } = await supabase.auth.signUp({ email, password });
     if (signUpError) {
       authMsg.textContent = `CRITICAL FAILURE: ${signUpError.message}`;
@@ -141,6 +146,44 @@ authForm.addEventListener('submit', async (e) => {
   } else {
     authMsg.textContent = "LOGIN SUCCESSFUL. FULL THROTTLE!";
     setTimeout(() => authModal.classList.add('hidden'), 1000);
+  }
+});
+
+// --- SUBMISSION LOGIC ---
+submitRideBtn.addEventListener('click', () => {
+  if (!user) {
+    authModal.classList.remove('hidden');
+    authMsg.textContent = "PLEASE JOIN THE PACK BEFORE MINTING ROUTES.";
+  } else {
+    submitModal.classList.remove('hidden');
+  }
+});
+
+submitClose.addEventListener('click', () => submitModal.classList.add('hidden'));
+
+rideForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!user) return;
+
+  const name = (document.getElementById('ride-name') as HTMLInputElement).value;
+  const desc = (document.getElementById('ride-desc') as HTMLTextAreaElement).value;
+  const dist = (document.getElementById('ride-dist') as HTMLInputElement).value;
+  const tags = (document.getElementById('ride-tags') as HTMLInputElement).value.split(',').map(t => t.trim());
+
+  submitMsg.textContent = "UPLOADING TO THE GRID...";
+  
+  // Simulation: Save to a 'pending_rides' table in Supabase
+  const { error } = await supabase
+    .from('pending_rides')
+    .insert([{ name, desc, distance: dist, tags, submitted_by: user.email }]);
+
+  if (error) {
+    console.error("Supabase Error:", error);
+    submitMsg.textContent = "SIMULATION ONLY: DB NOT CONNECTED. DATA LOGGED TO CONSOLE.";
+    console.log("NEW RIDE SUBMITTED:", { name, desc, dist, tags, user: user.email });
+  } else {
+    submitMsg.textContent = "ROUTE MINTED! PENDING REVIEW BY THE ELDERS.";
+    setTimeout(() => submitModal.classList.add('hidden'), 2000);
   }
 });
 
