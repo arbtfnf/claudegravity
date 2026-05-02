@@ -22,6 +22,7 @@
       <div class="stat"><span class="stat-num" id="filtered-count">0</span><span class="stat-label">In Sight</span></div>
     </div>
     <div class="nav-links">
+      <button id="auth-btn" class="offbeat-btn" style="background:transparent; border:2px solid var(--accent); color:var(--accent); margin-right:10px;">LOGIN 👤</button>
       <button id="show-exhausts" class="offbeat-btn" style="background:var(--accent); color:white; margin-right:10px;">EXHAUST LAB 🔥</button>
       <button id="show-enthusiasts" class="offbeat-btn" style="background:var(--accent2); color:black; margin-right:10px;">ENTHUSIASTS 🏆</button>
       <button id="offbeat-btn" class="offbeat-btn">FULL THROTTLE 🏁</button>
@@ -88,6 +89,8 @@
       <h2 style="font-family:'Black Ops One'; font-size:4rem; color:var(--accent2); text-align:center; padding:50px;">BENGALURU SUPERBIKE GARAGE</h2>
     </div>
     <div id="enthusiast-grid" class="card-grid"></div>
+  </section>
+
   <section id="exhaust-section" class="hidden">
     <div class="carbon-header" style="background: linear-gradient(to right, #000, #200, #000); border-bottom: 5px solid var(--accent);">
       <h2 style="font-family:'Black Ops One'; font-size:4rem; color:var(--accent); text-align:center; padding:50px;">NITRO EXHAUST LAB</h2>
@@ -149,6 +152,22 @@
         <p><strong>IMPORTANT:</strong> These stats were achieved by playing an online stimulation game and do NOT represent real-world conditions or legal driving limits.</p>
         <p>Attempting to replicate these speeds on public roads is <strong>ILLEGAL, EXTREMELY DANGEROUS, and LIFE-THREATENING</strong>.</p>
         <p>BikesNBeans does not promote or condone overspeeding. Ride safe, wear gear, and follow the law.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="auth-modal" class="modal-overlay hidden">
+    <div class="modal-card auth-card">
+      <button class="modal-close" id="auth-close">✕</button>
+      <div class="modal-body">
+        <h2 style="font-family:'Black Ops One'; color:var(--accent); text-align:center;">JOIN THE PACK</h2>
+        <p style="text-align:center; color:#888;">SIGN IN TO SAVE ROUTES & RATE RIDES</p>
+        <form id="auth-form" class="auth-form" style="display:flex; flex-direction:column; gap:15px; margin-top:30px;">
+          <input type="email" id="auth-email" placeholder="EMAIL ADDRESS" required style="padding:15px; background:#222; border:1px solid #444; color:white;" />
+          <input type="password" id="auth-password" placeholder="PASSWORD" required style="padding:15px; background:#222; border:1px solid #444; color:white;" />
+          <button type="submit" id="auth-submit" class="map-btn" style="padding:20px; font-size:1.2rem;">ENGAGE 🏁</button>
+        </form>
+        <div id="auth-msg" style="margin-top:20px; text-align:center; font-size:0.8rem; color:var(--accent2);"></div>
       </div>
     </div>
   </div>
