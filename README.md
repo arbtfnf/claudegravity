@@ -1,31 +1,22 @@
-# Antigravity Skills & AI Workflows
+# 🌌 ClaudeGravity
 
-![Antigravity Skills](https://img.shields.io/badge/AI-Antigravity-blue) ![Workflows](https://img.shields.io/badge/Automation-Agentic-green) [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://www.buymeacoffee.com/arbtfnf)
+**Transform technical "slop" into high-conversion landing pages automatically.**
 
-A powerful collection of autonomous AI agent skills and workflows, ported from Claude Code, designed specifically for the **Antigravity AI Coding Assistant**. This repository supercharges your agentic coding experience with automated batch processing, deep code reviews, and background maintenance polling.
+[![Skill.Fish](https://img.shields.io/badge/Install-Skill.Fish-brightgreen)](https://skill.fish/add/tsilva/claude-skills/project-readme-author)
+[![Claude Code](https://img.shields.io/badge/Claude-Code-purple)](https://anthropic.com/claude-code)
 
-## 🚀 Key Features
+ClaudeGravity is a specialized **Claude Code Skill** designed for developers who want their GitHub repositories to look as professional as a VC-backed startup’s landing page—without the manual work.
 
-* **Batch Migration & Orchestration**: Break down large-scale refactors into parallel, independently verifiable git worktrees. (The `batch` skill)
-* **Comprehensive AI Code Review**: Perform rigorous multi-perspective code reviews focusing on Code Reuse, Quality, and Efficiency, followed by autonomous cleanup. (The `simplify` skill)
-* **Continuous Background Polling**: Establish robust, automated background tasks and maintenance loops to monitor CI and trigger actions based on repository events. (The `loop` skill)
-* **Agent Self-Diagnosis**: Equip the AI with the ability to read its own session logs to troubleshoot stalled tasks and system errors. (The `debug` skill)
+## 🚀 The Hook: Why ClaudeGravity?
+Most READMEs are ignored because they are too dense. ClaudeGravity uses the **Hook-Prove-Enable-Extend** framework to ensure users understand your value proposition in under 10 seconds.
 
-## 🛠 Usage
+## ⚡ Key Features
+- 🏗 **Template Engine:** Project-specific layouts for CLI, AI/ML, and Web apps.
+- 🧠 **Prose Preservation:** Updates your docs without overwriting your custom manual notes.
+- 🎨 **Retina-Ready Visuals:** Integrated support for automated logos and formatting.
+- 📈 **Virality Scoring:** Validates your docs against Essential, Professional, and Elite tiers.
 
-These skills are natively compatible with the Antigravity Knowledge Item (KI) system. By integrating these artifacts into your local `<appDataDir>/knowledge` directory, Antigravity automatically inherits these advanced capabilities in all future coding sessions.
-
-### Invoking Skills
-Once installed, simply instruct the AI in natural language:
-* *"Simplify these code changes"*
-* *"Batch process this framework migration..."*
-* *"Start a maintenance loop to watch the PR"*
-* *"Debug your current session"*
-
----
-
-## ☕ Support
-
-If you find these skills helpful and want to support the development of more Antigravity workflows, consider buying me a coffee!
-
-[![Buy Me A Coffee](https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png)](https://www.buymeacoffee.com/arbtfnf)
+## 🛠 Installation
+Install via [Skill.Fish](https://skill.fish):
+```bash
+npx skillfish add tsilva/claude-skills project-readme-author
