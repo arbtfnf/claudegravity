@@ -10,5 +10,6 @@
 - [x] Move `trading-agents` to `/Users/anuragbandhu/localDev/trading-agents`
 - [x] Remove ride-atlas deploy workflow; add root `.gitignore`
 - [x] Replace machine-local skill symlinks with portable copies
-- [ ] Add first plug-and-play agent
+- [x] Trim stale `.github` metadata; add `agents/_template`
+- [ ] Copy `_template` into first real agent
 - [ ] Verify hook execution
