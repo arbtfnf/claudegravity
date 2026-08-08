@@ -1,0 +1,8 @@
+{
+  "title": "Simplify Skill",
+  "summary": "Instructs Antigravity on how to perform a 3-part code review (Code Reuse, Quality, Efficiency) and clean up code.",
+  "createdAt": "2026-04-17T19:20:00Z",
+  "references": [
+    "https://github.com/Gitlawb/openclaude/blob/main/src/skills/bundled/simplify.ts"
+  ]
+}

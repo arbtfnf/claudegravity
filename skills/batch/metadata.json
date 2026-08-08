@@ -1,0 +1,8 @@
+{
+  "title": "Batch Skill",
+  "summary": "Instructs Antigravity on how to orchestrate large, parallelizable batch changes across a codebase.",
+  "createdAt": "2026-04-17T19:20:00Z",
+  "references": [
+    "https://github.com/Gitlawb/openclaude/blob/main/src/skills/bundled/batch.ts"
+  ]
+}

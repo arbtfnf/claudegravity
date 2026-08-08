@@ -1,0 +1,31 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+.next/
+
+# Java / Go build
+target/
+*.class
+*.jar
+*.war
+*.exe
+
+# Local agent caches
+.gemini/

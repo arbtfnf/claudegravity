@@ -1,0 +1,8 @@
+{
+  "title": "Loop Skill",
+  "summary": "Instructs Antigravity on how to run continuous or recurring background tasks and maintenance loops.",
+  "createdAt": "2026-04-17T19:20:00Z",
+  "references": [
+    "https://github.com/Gitlawb/openclaude/blob/main/src/skills/bundled/loop.ts"
+  ]
+}
