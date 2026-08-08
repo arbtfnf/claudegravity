@@ -10,16 +10,17 @@ Scaffold is ready. Agents are coming next.
 
 | Path | Role |
 |------|------|
-| `agents/` | Plug-and-play agents (add here) |
+| `agents/` | Plug-and-play agents (start with `agents/workflow-agent/`) |
 | `skills/` | Reusable agent skills |
+| `docs/` | Blueprint docs — [100/100 Workflow Agent](docs/100-100-workflow-agent-blueprint.md) |
 | `.junie/` + `.workflow/` | Continuity blueprint: context, phases, lessons, hooks |
 
 ## Quick start
 
-1. Run `./install-workflow-blueprint.sh` if hooks/context dirs need init.
-2. Follow `.junie/AGENTS.md`.
-3. Track active work in `.workflow/context/current-work.md`.
-4. Drop a new agent under `agents/<name>/` with a clear `SKILL.md` or agent entrypoint.
+1. Read the blueprint: [docs/100-100-workflow-agent-blueprint.md](docs/100-100-workflow-agent-blueprint.md) ([Medium article](https://medium.com/@anrgbndhu/building-a-100-100-workflow-agent-from-scratch-bb2a0f6c95d6))
+2. Run `./install-workflow-blueprint.sh` to drop the workflow layer into any repo
+3. Use `agents/workflow-agent/SKILL.md` as the plug-and-play agent entrypoint
+4. Follow `.junie/AGENTS.md` and track work in `.workflow/context/current-work.md`
 
 ## Agent contract (target)
 

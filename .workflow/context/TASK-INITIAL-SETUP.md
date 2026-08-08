@@ -11,5 +11,6 @@
 - [x] Remove ride-atlas deploy workflow; add root `.gitignore`
 - [x] Replace machine-local skill symlinks with portable copies
 - [x] Trim stale `.github` metadata; add `agents/_template`
-- [ ] Copy `_template` into first real agent
+- [x] Add workflow agent + blueprint doc (Medium article reference)
+- [ ] Copy `_template` into another real agent
 - [ ] Verify hook execution
