@@ -1,14 +1,16 @@
 # ClaudeGravity — CLAUDE.md
 
-Plug-and-play AI agent kit. App projects are out of scope here — only agents, skills, and the continuity workflow.
+Plug-and-play AI agent kit for Cursor, Claude Code, Junie, and Antigravity.
 
 ## Layout
-- `agents/workflow-agent/` — 100/100 workflow agent (see `SKILL.md`)
-- `agents/agent-evaluator/` — 10-dimension / 100-point grader (skill + script + checklist)
+- `agents/readme-author/` — original ClaudeGravity README skill (Hook-Prove-Enable-Extend)
+- `agents/workflow-agent/` — 100/100 workflow / continuity agent
+- `agents/agent-evaluator/` — 10-dimension / 100-point grader
+- `skills/batch|simplify|loop|debug/` — generic coding skills (use `SKILL.md`)
+- `docs/coding-skills.md` — how skills work across hosts
 - `docs/100-100-workflow-agent-blueprint.md` — continuity blueprint + article
 - `docs/agent-evaluation-framework.md` — evaluation framework + article
-- `skills/` — reusable skills invoked by agents
-- `.junie/AGENTS.md` — workflow rules (phases, line limits, retrospectives)
+- `.junie/AGENTS.md` — workflow rules
 - `.workflow/context/current-work.md` — active task state
 - `.workflow/lessons/planning-lessons.md` — read before new tasks
 
@@ -20,5 +22,5 @@ Plug-and-play AI agent kit. App projects are out of scope here — only agents, 
 
 ## Adding an agent
 Create `agents/<name>/` with at least:
-- `SKILL.md` (or equivalent entrypoint) — purpose, when to use, how to run
-- Any scripts/prompts the agent needs, kept portable (no absolute local symlinks)
+- `SKILL.md` — purpose, when to use, how to run
+- Portable scripts/prompts (no absolute local symlinks as primary delivery)

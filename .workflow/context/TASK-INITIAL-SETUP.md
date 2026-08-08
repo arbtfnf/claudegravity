@@ -14,4 +14,5 @@
 - [x] Add workflow agent + blueprint doc (Medium article reference)
 - [x] Add agent-evaluator (framework doc + skill + script + checklist)
 - [x] Confirm Medium URL hash for evaluator article
+- [x] Restore readme-author + generic coding skills (Antigravity → portable)
 - [ ] Verify hook execution

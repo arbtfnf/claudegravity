@@ -1,22 +1,28 @@
 # ClaudeGravity
 
-Plug-and-play AI agents for Cursor, Claude Code, and Junie.
+Plug-and-play AI agents and skills for Cursor, Claude Code, Junie, and Antigravity.
 
-This repo is the home for drop-in agents and skills you can install into any project. App code and experiments live elsewhere — agents live here.
+Agents and skills live here. App code lives elsewhere.
+
+## What was ClaudeGravity originally?
+
+Two layers got conflated under one name — both are first-class now:
+
+| Origin | What it was | In this repo now |
+|--------|-------------|------------------|
+| **First commit** | Antigravity skills: `batch`, `simplify`, `loop`, `debug` (ported from Claude Code–style workflows) | Generic [`skills/`](skills/) — see [docs/coding-skills.md](docs/coding-skills.md) |
+| **ClaudeGravity branding** | README skill: turn dense docs into high-conversion landing READMEs via **Hook → Prove → Enable → Extend** (README also linked an external Skill.Fish package) | Portable [`agents/readme-author/`](agents/readme-author/SKILL.md) — no Skill.Fish required |
+
+**Yes — the Antigravity skills are generic.** The procedures work on any coding agent; only tool names differ by host. Copy `skills/<name>/` into another project and invoke in natural language.
 
 ## Articles
-
-Blueprints in this repo are backed by published write-ups:
 
 ### 1. Building a 100/100 Workflow Agent From Scratch
 
 **[Read on Medium](https://medium.com/@anrgbndhu/building-a-100-100-workflow-agent-from-scratch-bb2a0f6c95d6)** · Anurag Bandhu · Jul 28, 2026 · ~11 min
 
-A practical blueprint for an agent that remembers where you left off across sessions, weeks, and context resets.
+Agent that remembers where you left off across sessions. **Core idea:** no state file → failed workflow agent. Prefer hooks over prompt hopes.
 
-**Core idea:** A workflow agent with no state file is a failed workflow agent. Prefer mechanisms (hooks) over prompt hopes.
-
-**In this repo:**
 - Doc: [`docs/100-100-workflow-agent-blueprint.md`](docs/100-100-workflow-agent-blueprint.md)
 - Agent: [`agents/workflow-agent/SKILL.md`](agents/workflow-agent/SKILL.md)
 - Install: `./install-workflow-blueprint.sh`
@@ -25,49 +31,50 @@ A practical blueprint for an agent that remembers where you left off across sess
 
 **[Read on Medium](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37)** · Anurag Bandhu · Jul 2, 2026 · ~9 min
 
-How to grade a fleet of AI agents like a Forward Deployed Engineer — and what the scores teach about agents that actually work.
+Grade agent configs like a Forward Deployed Engineer. **Core idea:** prompts are suggestions; hooks are guarantees. Close claim-vs-capability gaps.
 
-**Core idea:** Prompts are suggestions. Hooks are guarantees. Close the claim-vs-capability gap (prompt promises vs tools/wiring).
+**Ten dimensions (×10 → /100):** Tools · Allowed Tools · Resources · Hooks · State · Enforcement · Commands & UX · Safety · Context Efficiency · Grounding
 
-**Ten dimensions (0–10 each → /100):** Tools · Allowed Tools · Resources · Hooks · State · Enforcement Language · Commands & UX · Safety · Context Efficiency · Grounding
-
-**In this repo:**
 - Doc: [`docs/agent-evaluation-framework.md`](docs/agent-evaluation-framework.md)
-- Agent: [`agents/agent-evaluator/SKILL.md`](agents/agent-evaluator/SKILL.md)
-- Checklist: [`agents/agent-evaluator/checklist.md`](agents/agent-evaluator/checklist.md)
-- Script: `python3 agents/agent-evaluator/grade_agent.py <config.json>`
+- Agent / checklist / script: [`agents/agent-evaluator/`](agents/agent-evaluator/)
 
 ## Layout
 
 | Path | Role |
 |------|------|
-| `agents/workflow-agent/` | Continuity / ticket lifecycle agent |
-| `agents/agent-evaluator/` | Grade any agent config (10×10 rubric) |
-| `skills/` | Reusable agent skills |
-| `docs/` | Article-backed blueprints |
-| `.junie/` + `.workflow/` | Continuity layer: context, phases, lessons, hooks |
+| `agents/readme-author/` | Hook-Prove-Enable-Extend README skill (original ClaudeGravity pitch) |
+| `agents/workflow-agent/` | Continuity / ticket lifecycle |
+| `agents/agent-evaluator/` | Grade configs (10×10 rubric) |
+| `skills/batch` `simplify` `loop` `debug` | Generic coding skills (Antigravity → portable) |
+| `docs/` | Article + skills blueprints |
+| `.junie/` + `.workflow/` | Continuity layer |
 
 ## Quick start
 
-1. Read the articles (links above) or the local docs under `docs/`
-2. Install the workflow layer into a project: `./install-workflow-blueprint.sh`
-3. Track work in `.workflow/context/current-work.md` (see `.junie/AGENTS.md`)
-4. Grade an agent config:
-
 ```bash
+# Continuity layer into any repo
+./install-workflow-blueprint.sh
+
+# Grade a sample agent config
 python3 agents/agent-evaluator/grade_agent.py agents/agent-evaluator/fixtures/sample-task-tracker.json
+
+# Copy coding skills into another project
+cp -R skills/batch skills/simplify skills/loop skills/debug /path/to/project/skills/
 ```
+
+Natural language invokes:
+
+- “Rewrite this README with Hook-Prove-Enable-Extend”
+- “Batch this migration…” / “Simplify these changes” / “Loop until CI is green”
+- “Grade this agent config”
 
 ## Agent contract
 
-Each agent under `agents/` should be:
-
-- **Self-contained** — installable without the rest of this monorepo’s history
-- **Documented** — purpose, inputs/outputs, and how to invoke it
-- **Portable** — no machine-local absolute symlinks as the primary delivery
+Each agent under `agents/` should be self-contained, documented, and portable (no machine-only absolute symlinks as the primary delivery).
 
 ## What you get
 
-**Workflow layer** — remembers where you left off, verifies PR/ticket state before claiming progress, and writes planning lessons after each completed task.
-
-**Evaluation layer** — same rubric in three formats (chat skill, Python script, 15-point checklist) so you measure configs instead of relying on vibes.
+- **README author** — original ClaudeGravity landing-page skill, portable
+- **Coding skills** — batch / simplify / loop / debug for any agent host
+- **Workflow layer** — state file, hooks, lessons across sessions
+- **Evaluation layer** — chat skill + Python grader + checklist
