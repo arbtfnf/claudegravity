@@ -10,17 +10,18 @@ Scaffold is ready. Agents are coming next.
 
 | Path | Role |
 |------|------|
-| `agents/` | Plug-and-play agents (start with `agents/workflow-agent/`) |
+| `agents/workflow-agent/` | Continuity / ticket lifecycle agent |
+| `agents/agent-evaluator/` | Grade any agent config (10×10 rubric) |
 | `skills/` | Reusable agent skills |
-| `docs/` | Blueprint docs — [100/100 Workflow Agent](docs/100-100-workflow-agent-blueprint.md) |
-| `.junie/` + `.workflow/` | Continuity blueprint: context, phases, lessons, hooks |
+| `docs/` | Article-backed blueprints |
+| `.junie/` + `.workflow/` | Continuity layer: context, phases, lessons, hooks |
 
 ## Quick start
 
-1. Read the blueprint: [docs/100-100-workflow-agent-blueprint.md](docs/100-100-workflow-agent-blueprint.md) ([Medium article](https://medium.com/@anrgbndhu/building-a-100-100-workflow-agent-from-scratch-bb2a0f6c95d6))
-2. Run `./install-workflow-blueprint.sh` to drop the workflow layer into any repo
-3. Use `agents/workflow-agent/SKILL.md` as the plug-and-play agent entrypoint
-4. Follow `.junie/AGENTS.md` and track work in `.workflow/context/current-work.md`
+1. **Build continuity:** [docs/100-100-workflow-agent-blueprint.md](docs/100-100-workflow-agent-blueprint.md) · [Medium](https://medium.com/@anrgbndhu/building-a-100-100-workflow-agent-from-scratch-bb2a0f6c95d6)
+2. **Measure quality:** [docs/agent-evaluation-framework.md](docs/agent-evaluation-framework.md) · [Medium](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one)
+3. Install the workflow layer: `./install-workflow-blueprint.sh`
+4. Grade a config: `python3 agents/agent-evaluator/grade_agent.py agents/agent-evaluator/fixtures/sample-task-tracker.json`
 
 ## Agent contract (target)
 

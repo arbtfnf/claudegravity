@@ -1,0 +1,22 @@
+{
+  "name": "sample-task-tracker",
+  "description": "Demo config for grade_agent.py — intentionally mid-tier.",
+  "model": "pinned-model-example",
+  "prompt": "## Critical Rules\n1. You MUST update the context file after every action.\n2. NEVER claim a PR is merged without running gh pr view.\n3. NEVER delete archive files.\n\nPersist all context to .workflow/context/current-work.md so you never lose track between sessions.\nVerify before you claim external state.\n",
+  "tools": ["fs_read", "fs_write", "execute_bash", "grep", "glob"],
+  "allowedTools": [
+    "fs_read",
+    "fs_write",
+    "execute_bash",
+    "grep",
+    "glob",
+    "@github/get_pull_request",
+    "@github/get_pull_request_status"
+  ],
+  "resources": [".junie/AGENTS.md", "docs/100-100-workflow-agent-blueprint.md"],
+  "hooks": {
+    "spawn": ".junie/hooks/spawn_check.sh"
+  },
+  "welcomeMessage": "Workflow agent ready. Say status, done, or archive.",
+  "keyboardShortcut": ""
+}

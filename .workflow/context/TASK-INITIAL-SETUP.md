@@ -12,5 +12,6 @@
 - [x] Replace machine-local skill symlinks with portable copies
 - [x] Trim stale `.github` metadata; add `agents/_template`
 - [x] Add workflow agent + blueprint doc (Medium article reference)
-- [ ] Copy `_template` into another real agent
+- [x] Add agent-evaluator (framework doc + skill + script + checklist)
+- [ ] Confirm Medium URL hash for evaluator article if slug redirect fails
 - [ ] Verify hook execution

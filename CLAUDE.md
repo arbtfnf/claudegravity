@@ -4,8 +4,9 @@ Plug-and-play AI agent kit. App projects are out of scope here — only agents, 
 
 ## Layout
 - `agents/workflow-agent/` — 100/100 workflow agent (see `SKILL.md`)
-- `agents/` — other drop-in agents
-- `docs/100-100-workflow-agent-blueprint.md` — full blueprint + article link
+- `agents/agent-evaluator/` — 10-dimension / 100-point grader (skill + script + checklist)
+- `docs/100-100-workflow-agent-blueprint.md` — continuity blueprint + article
+- `docs/agent-evaluation-framework.md` — evaluation framework + article
 - `skills/` — reusable skills invoked by agents
 - `.junie/AGENTS.md` — workflow rules (phases, line limits, retrospectives)
 - `.workflow/context/current-work.md` — active task state
