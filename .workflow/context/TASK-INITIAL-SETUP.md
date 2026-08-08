@@ -13,5 +13,5 @@
 - [x] Trim stale `.github` metadata; add `agents/_template`
 - [x] Add workflow agent + blueprint doc (Medium article reference)
 - [x] Add agent-evaluator (framework doc + skill + script + checklist)
-- [ ] Confirm Medium URL hash for evaluator article if slug redirect fails
+- [x] Confirm Medium URL hash for evaluator article
 - [ ] Verify hook execution

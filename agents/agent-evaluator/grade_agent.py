@@ -2,7 +2,7 @@
 """Deterministic agent config grader — 10 dimensions / 100 points.
 
 Zero third-party dependencies. See docs/agent-evaluation-framework.md
-and https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one
+and https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37
 """
 
 from __future__ import annotations

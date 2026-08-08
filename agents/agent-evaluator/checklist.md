@@ -2,7 +2,7 @@
 
 Use during PR review or when you don’t want to run the script. Tick = 1 point toward a gut-check (not the full /100).
 
-**Article:** [We Had 20+ AI Agents…](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one)
+**Article:** [We Had 20+ AI Agents…](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37)
 
 ## Wiring
 

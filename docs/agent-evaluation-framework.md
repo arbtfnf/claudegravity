@@ -1,6 +1,6 @@
 # Agent Evaluation Framework (10 Dimensions / 100 Points)
 
-> **Source article:** [We Had 20+ AI Agents and No Way to Know If They Were Any Good. So I Built One.](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one) by Anurag Bandhu (Jul 2, 2026, ~9 min read)
+> **Source article:** [We Had 20+ AI Agents and No Way to Know If They Were Any Good. So I Built One.](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37) by Anurag Bandhu (Jul 2, 2026, ~9 min read)
 
 Grade AI agent configs like a Forward Deployed Engineer: same rubric, three delivery formats, zero excuse not to measure.
 

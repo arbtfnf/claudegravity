@@ -19,7 +19,7 @@ Scaffold is ready. Agents are coming next.
 ## Quick start
 
 1. **Build continuity:** [docs/100-100-workflow-agent-blueprint.md](docs/100-100-workflow-agent-blueprint.md) · [Medium](https://medium.com/@anrgbndhu/building-a-100-100-workflow-agent-from-scratch-bb2a0f6c95d6)
-2. **Measure quality:** [docs/agent-evaluation-framework.md](docs/agent-evaluation-framework.md) · [Medium](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one)
+2. **Measure quality:** [docs/agent-evaluation-framework.md](docs/agent-evaluation-framework.md) · [Medium](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37)
 3. Install the workflow layer: `./install-workflow-blueprint.sh`
 4. Grade a config: `python3 agents/agent-evaluator/grade_agent.py agents/agent-evaluator/fixtures/sample-task-tracker.json`
 

@@ -4,7 +4,7 @@ Plug-and-play **evaluation archetype**: grade an agent config against the 10-dim
 
 ## Source
 
-[We Had 20+ AI Agents and No Way to Know If They Were Any Good. So I Built One.](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one)  
+[We Had 20+ AI Agents and No Way to Know If They Were Any Good. So I Built One.](https://medium.com/@anrgbndhu/we-had-20-ai-agents-and-no-way-to-know-if-they-were-any-good-so-i-built-one-8f522ce07a37)  
 Repo guide: [docs/agent-evaluation-framework.md](../../docs/agent-evaluation-framework.md)
 
 ## When to use
