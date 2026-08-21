@@ -16,5 +16,5 @@
 - [x] Confirm Medium URL hash for evaluator article
 - [x] Restore readme-author + generic coding skills (Antigravity → portable)
 - [x] Add Graphify + Slack human-agent teams article (`docs/human-agent-teams-graphify.md`)
-- [ ] Add Medium URL for article 3 after publish
+- [x] Add Medium URL for article 3 after publish
 - [ ] Verify hook execution

@@ -40,7 +40,7 @@ Grade agent configs like a Forward Deployed Engineer. **Core idea:** prompts are
 
 ### 3. Stop Paying AI to Rediscover Your Codebase
 
-**Medium draft** (URL after publish) · Anurag Bandhu · Aug 2026
+**[Read on Medium](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb)** · Anurag Bandhu · Aug 21, 2026 · ~4 min
 
 Graphify maps the code; Slack holds the conversation. Distill decisions into a SHA-keyed graph plus a short session pointer so agents retrieve instead of rediscovering. **Core idea:** do not rebuild a graph engine — stack a human-gated conversational layer on structure.
 
@@ -81,9 +81,16 @@ Natural language invokes:
 
 Each agent under `agents/` should be self-contained, documented, and portable (no machine-only absolute symlinks as the primary delivery).
 
+## Contributing
+
+Changes to `main` go through a pull request. The repo has a branch ruleset, **[Protect default branch](https://github.com/arbtfnf/claudegravity/rules/21161954)** (force-push and deleting `main` blocked; PRs required). Enforcement starts **Disabled** so existing workflows keep working — turn it **Active** when you want GitHub to enforce the PR path.
+
+Fork or branch → PR → merge. Do not push commits straight to `main` once the ruleset is Active.
+
 ## What you get
 
 - **README author** — original ClaudeGravity landing-page skill, portable
 - **Coding skills** — batch / simplify / loop / debug for any agent host
 - **Workflow layer** — state file, hooks, lessons across sessions
 - **Evaluation layer** — chat skill + Python grader + checklist
+- **Human-agent teams** — Graphify as the code map, `current-work.md` as now, Slack/PRs distilled behind a human gate ([article 3](docs/human-agent-teams-graphify.md) · [Medium](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb))

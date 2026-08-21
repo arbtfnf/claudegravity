@@ -1,6 +1,6 @@
 # Stop Paying AI to Rediscover Your Codebase
 
-> **Source article:** Draft for Medium — *Stop Paying AI to Rediscover Your Codebase: Building Human-Agent Teams with Graphify and Slack* by Anurag Bandhu (Aug 2026)  
+> **Source article:** [Stop Paying AI to Rediscover Your Codebase](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb) by Anurag Bandhu (Aug 21, 2026, ~4 min read)  
 > **Tags:** AI Agents · Graphify · Slack · Claude Code · Knowledge Graphs  
 > Not affiliated with Slack, Anthropic, or Graphify. Graphify is open source; the conversational loop is an architecture, not a product claim.
 
