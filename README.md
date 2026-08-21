@@ -38,6 +38,15 @@ Grade agent configs like a Forward Deployed Engineer. **Core idea:** prompts are
 - Doc: [`docs/agent-evaluation-framework.md`](docs/agent-evaluation-framework.md)
 - Agent / checklist / script: [`agents/agent-evaluator/`](agents/agent-evaluator/)
 
+### 3. Stop Paying AI to Rediscover Your Codebase
+
+**Medium draft** (URL after publish) · Anurag Bandhu · Aug 2026
+
+Graphify maps the code; Slack holds the conversation. Distill decisions into a SHA-keyed graph plus a short session pointer so agents retrieve instead of rediscovering. **Core idea:** do not rebuild a graph engine — stack a human-gated conversational layer on structure.
+
+- Doc: [`docs/human-agent-teams-graphify.md`](docs/human-agent-teams-graphify.md)
+- Now layer (already in this kit): [`agents/workflow-agent/SKILL.md`](agents/workflow-agent/SKILL.md) · `.workflow/context/current-work.md`
+
 ## Layout
 
 | Path | Role |
@@ -46,7 +55,7 @@ Grade agent configs like a Forward Deployed Engineer. **Core idea:** prompts are
 | `agents/workflow-agent/` | Continuity / ticket lifecycle |
 | `agents/agent-evaluator/` | Grade configs (10×10 rubric) |
 | `skills/batch` `simplify` `loop` `debug` | Generic coding skills (Antigravity → portable) |
-| `docs/` | Article + skills blueprints |
+| `docs/` | Article + skills blueprints (workflow, evaluator, Graphify/Slack teams) |
 | `.junie/` + `.workflow/` | Continuity layer |
 
 ## Quick start
