@@ -40,7 +40,7 @@ Grade agent configs like a Forward Deployed Engineer. **Core idea:** prompts are
 
 ### 3. Stop Paying AI to Rediscover Your Codebase
 
-**Medium draft** (URL after publish) · Anurag Bandhu · Aug 2026
+**[Read on Medium](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb)** · Anurag Bandhu · Aug 21, 2026 · ~4 min
 
 Graphify maps the code; Slack holds the conversation. Distill decisions into a SHA-keyed graph plus a short session pointer so agents retrieve instead of rediscovering. **Core idea:** do not rebuild a graph engine — stack a human-gated conversational layer on structure.
 
@@ -93,4 +93,4 @@ Fork or branch → PR → merge. Do not push commits straight to `main` once the
 - **Coding skills** — batch / simplify / loop / debug for any agent host
 - **Workflow layer** — state file, hooks, lessons across sessions
 - **Evaluation layer** — chat skill + Python grader + checklist
-- **Human-agent teams** — Graphify as the code map, `current-work.md` as now, Slack/PRs distilled behind a human gate ([article 3](docs/human-agent-teams-graphify.md))
+- **Human-agent teams** — Graphify as the code map, `current-work.md` as now, Slack/PRs distilled behind a human gate ([article 3](docs/human-agent-teams-graphify.md) · [Medium](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb))
