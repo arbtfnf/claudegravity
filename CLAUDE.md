@@ -10,6 +10,7 @@ Plug-and-play AI agent kit for Cursor, Claude Code, Junie, and Antigravity.
 - `docs/coding-skills.md` — how skills work across hosts
 - `docs/100-100-workflow-agent-blueprint.md` — continuity blueprint + article
 - `docs/agent-evaluation-framework.md` — evaluation framework + article
+- `docs/human-agent-teams-graphify.md` — Graphify + Slack human-agent teams article
 - `.junie/AGENTS.md` — workflow rules
 - `.workflow/context/current-work.md` — active task state
 - `.workflow/lessons/planning-lessons.md` — read before new tasks

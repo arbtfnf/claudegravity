@@ -2,7 +2,7 @@
 ## Task: ClaudeGravity plug-and-play agent kit
 ## Status: Active
 ## Created: 2026-08-08
-## Last Updated: 2026-08-08
+## Last Updated: 2026-08-21
 
 - [x] Strip unrelated apps out of this repo
 - [x] Reframe README / CLAUDE.md as agent kit
@@ -15,4 +15,6 @@
 - [x] Add agent-evaluator (framework doc + skill + script + checklist)
 - [x] Confirm Medium URL hash for evaluator article
 - [x] Restore readme-author + generic coding skills (Antigravity → portable)
+- [x] Add Graphify + Slack human-agent teams article (`docs/human-agent-teams-graphify.md`)
+- [ ] Add Medium URL for article 3 after publish
 - [ ] Verify hook execution
