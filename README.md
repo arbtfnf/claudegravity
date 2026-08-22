@@ -25,6 +25,7 @@ Agent that remembers where you left off across sessions. **Core idea:** no state
 
 - Doc: [`docs/100-100-workflow-agent-blueprint.md`](docs/100-100-workflow-agent-blueprint.md)
 - Agent: [`agents/workflow-agent/SKILL.md`](agents/workflow-agent/SKILL.md)
+- Before code: [`docs/implement-or-thought-process.md`](docs/implement-or-thought-process.md) — **Implement now** vs **show thought process**
 - Install: `./install-workflow-blueprint.sh`
 
 ### 2. We Had 20+ AI Agents and No Way to Know If They Were Any Good. So I Built One.
@@ -55,7 +56,7 @@ Graphify maps the code; Slack holds the conversation. Distill decisions into a S
 | `agents/workflow-agent/` | Continuity / ticket lifecycle |
 | `agents/agent-evaluator/` | Grade configs (10×10 rubric) |
 | `skills/batch` `simplify` `loop` `debug` | Generic coding skills (Antigravity → portable) |
-| `docs/` | Article + skills blueprints (workflow, evaluator, Graphify/Slack teams) |
+| `docs/` | Article + skills blueprints (workflow, evaluator, Graphify/Slack teams, implement-or-thought-process) |
 | `.junie/` + `.workflow/` | Continuity layer |
 
 ## Quick start
@@ -77,6 +78,19 @@ Natural language invokes:
 - “Batch this migration…” / “Simplify these changes” / “Loop until CI is green”
 - “Grade this agent config”
 
+## Before the agent writes code
+
+After a work prompt, the workflow agent **asks** — it does not assume you want code, and it does not dump a rationale essay unless you ask for one.
+
+| You pick | Agent does |
+|----------|------------|
+| **Implement now** | Skip the write-up; go to code. Persist a 5-line note (goal + files) so the next session is not blind. |
+| **Show thought process** | Write *why this approach* (chosen / because / rejected / revisit-if). **No code** until you say `approved, implement`. |
+
+Do not ask for `status`, typos, or already-approved slices. Force thought process for scoring, auth, data model, and other hard-to-undo contracts.
+
+Say `implement now` / `just code`, or `show thought process` / `why first`. Spec: [`docs/implement-or-thought-process.md`](docs/implement-or-thought-process.md).
+
 ## Agent contract
 
 Each agent under `agents/` should be self-contained, documented, and portable (no machine-only absolute symlinks as the primary delivery).
@@ -91,6 +105,6 @@ Fork or branch → PR → merge. Do not push commits straight to `main` once the
 
 - **README author** — original ClaudeGravity landing-page skill, portable
 - **Coding skills** — batch / simplify / loop / debug for any agent host
-- **Workflow layer** — state file, hooks, lessons across sessions
+- **Workflow layer** — state file, hooks, lessons across sessions; implement-now vs thought-process fork before code
 - **Evaluation layer** — chat skill + Python grader + checklist
 - **Human-agent teams** — Graphify as the code map, `current-work.md` as now, Slack/PRs distilled behind a human gate ([article 3](docs/human-agent-teams-graphify.md) · [Medium](https://medium.com/@anrgbndhu/stop-paying-ai-to-rediscover-your-codebase-d12e0451c1eb))

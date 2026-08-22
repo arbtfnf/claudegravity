@@ -41,7 +41,8 @@ That creates:
 | `.workflow/context/<TASK-ID>.md` | Per-ticket state |
 | `.workflow/archive/` | Completed tickets (never delete) |
 | `.workflow/lessons/planning-lessons.md` | Lessons read at pickup, appended at retrospective |
-| `.junie/AGENTS.md` | Rules: phases, 80-line cap, verify-before-claim |
+| `.workflow/plans/PLAN-TEMPLATE.md` | Plan scaffold including `## Why this approach` |
+| `.junie/AGENTS.md` | Rules: phases, 80-line cap, verify-before-claim, implement-now vs thought-process |
 | `.junie/hooks/spawn_check.sh` | Line count, phase, staleness on spawn |
 | `.junie/hooks/retrospective.sh` | Archive + lesson prompt on completion |
 
@@ -119,12 +120,25 @@ Use `skills/` and subagents for depth. Keep the workflow prompt under ~12K chars
 ### 7. Prompt structure
 Persona by phase → How you work (Pick up / Track / Monitor / Archive / Retrospective) → Context hygiene → Critical rules. Reference skills by path, don't inline long procedures.
 
+### 7b. Implement now, or show thought process
+After a work prompt, **ask before any code edit**. Do not assume implementation, and do not write a rationale essay unless the user asks (or the change is hard to undo).
+
+| You pick | Agent does |
+|----------|------------|
+| **Implement now** | Developer. Skip `## Why this approach`. Persist a 5-line note (goal + files). |
+| **Show thought process** | Architect. Write chosen / because / rejected / revisit-if. No code until `approved, implement`. |
+
+Skip the question for `status`, typos, already-approved slices. **Force** thought process for scoring, auth, data model, public contracts.
+
+Full spec: [implement-or-thought-process.md](implement-or-thought-process.md). Plan scaffold: [`.workflow/plans/PLAN-TEMPLATE.md`](../.workflow/plans/PLAN-TEMPLATE.md).
+
 ### 8. Critical rules (MUST/NEVER)
 - Persist context after every significant action  
 - Never claim PR merged/approved without `gh pr view`  
 - Never claim ticket closed without tracker check  
 - One task at a time (except explicitly coupled tickets)  
 - Post-write: `wc -l` on context file; compress in the same response if over 80  
+- After a work prompt, **ask** implement now vs thought process before any code (skip/force rules in [implement-or-thought-process.md](implement-or-thought-process.md))  
 
 ### 9. Close the learning loop
 On archive: run `.junie/hooks/retrospective.sh` → append 1–2 lessons to `planning-lessons.md`.  
@@ -161,7 +175,8 @@ Copy from the article; tick before calling an agent "production-ready":
 - [ ] Verify-before-claim for PRs and tickets  
 - [ ] Prompt < 12K; procedures in `skills/`  
 - [ ] Hook paths absolute; no fragile inline `bash -c`  
-- [ ] Config validated; hooks tested from non-repo cwd  
+- [ ] Config validated; hooks tested from non-repo cwd
+- [ ] Ask-before-code fork: implement now vs thought process (skip/force rules documented)  
 
 ---
 
@@ -183,6 +198,7 @@ The **shape** is always the same; only paths and hook wiring change.
 | File | Role |
 |------|------|
 | [agents/workflow-agent/SKILL.md](../agents/workflow-agent/SKILL.md) | Agent entrypoint — when to use, how to run |
+| [implement-or-thought-process.md](implement-or-thought-process.md) | Fork before code: implement now vs show why |
 | [install-workflow-blueprint.sh](../install-workflow-blueprint.sh) | One-shot installer for other repos |
 | [.junie/AGENTS.md](../.junie/AGENTS.md) | Operational rules for agents in this repo |
 | [skills/](../skills/) | Extracted procedures (batch, simplify, loop, debug) |
