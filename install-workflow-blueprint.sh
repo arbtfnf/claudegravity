@@ -5,7 +5,7 @@
 echo "🏗 Installing 100/100 Workflow Agent Blueprint..."
 
 # 1. Create directory structure
-mkdir -p .workflow/{context,archive,lessons}
+mkdir -p .workflow/{context,archive,lessons,plans}
 mkdir -p .junie/hooks
 
 # 2. Create AGENTS.md
@@ -33,10 +33,19 @@ Follow these rules to ensure continuity across sessions and avoid state hallucin
 - **Retrospective:** When a task is done, run \`.junie/hooks/retrospective.sh\` and append 1-2 learned planning lessons to the lessons file.
 
 ## Personas by Phase
-- **Architect:** Focus on design docs, schema, and API contracts.
+- **Architect:** Focus on design docs, schema, and API contracts. No code until the user picks a path (below) or says \`approved, implement\`.
 - **Developer:** Focus on implementation, tests, and minimal code changes.
 - **QA:** Focus on edge cases, failure modes, and verification scripts.
 - **Investigator:** Focus on logs, traces, and root cause analysis.
+
+## Before implementation: ask
+After a work prompt and **before any code edit**, offer a choice:
+1. **Implement now** — skip the rationale write-up; go to Developer. Persist a 5-line note (goal + files).
+2. **Show thought process** — stay in Architect. Write \`## Why this approach\` (Chosen / Because / Rejected / Revisit if). No code until \`approved, implement\`.
+
+Skip the question for: \`status\`, typos / one-line fixes, already-approved slices.
+Force thought process (do not offer a skip) for: scoring, auth, data model, public API/contracts, anything hard to undo.
+Recommend thought process on new features; recommend implement now on obvious bugfixes.
 EOF
 
 # 3. Create spawn_check.sh
@@ -103,9 +112,41 @@ Read this file before starting a new ticket.
 ## Lessons
 - Using a stable symlink (current-work.md) allows hooks to remain path-agnostic while supporting multiple tasks.
 - Extracting gotchas to Agent Skills reduces context token weight and makes them reusable across sessions.
+- After a work prompt, ask Implement now vs Show thought process — do not assume code, and do not dump rationale unless asked (or the change is hard to undo).
 EOF
 
-# 6. Set permissions
+# 6. Plan template (implement-now vs thought-process)
+mkdir -p .workflow/plans
+cat <<'EOF' > .workflow/plans/PLAN-TEMPLATE.md
+# <TASK-ID> Plan
+
+## Goal (1 sentence)
+
+## Why this approach
+**Chosen:** …
+
+**Because:**
+- …
+
+**Rejected:**
+- … — why not
+
+**Revisit if:** …
+
+> Omit this section on the **Implement now** path. Keep a 5-line note (goal + files) instead.
+
+## Out of scope
+
+## Files to touch (exact paths)
+
+## Steps (numbered, each ≤3 files)
+
+## Acceptance criteria
+
+## Risks / open questions
+EOF
+
+# 7. Set permissions
 chmod +x .junie/hooks/*.sh
 
 echo "✅ 100/100 Workflow Blueprint installed successfully."

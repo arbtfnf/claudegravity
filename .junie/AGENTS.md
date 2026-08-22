@@ -21,7 +21,18 @@ Follow these rules to ensure continuity across sessions and avoid state hallucin
 - **Retrospective:** When a task is done, run `.junie/hooks/retrospective.sh` and append 1-2 learned planning lessons to the lessons file.
 
 ## Personas by Phase
-- **Architect:** Focus on design docs, schema, and API contracts.
+- **Architect:** Focus on design docs, schema, and API contracts. No code until the user picks a path (below) or says `approved, implement`.
 - **Developer:** Focus on implementation, tests, and minimal code changes.
 - **QA:** Focus on edge cases, failure modes, and verification scripts.
 - **Investigator:** Focus on logs, traces, and root cause analysis.
+
+## Before implementation: ask
+After a work prompt and **before any code edit**, offer a choice:
+1. **Implement now** — skip the rationale write-up; go to Developer. Persist a 5-line note (goal + files).
+2. **Show thought process** — stay in Architect. Write `## Why this approach` (Chosen / Because / Rejected / Revisit if). No code until `approved, implement`.
+
+Skip the question for: `status`, typos / one-line fixes, already-approved slices.
+Force thought process (do not offer a skip) for: scoring, auth, data model, public API/contracts, anything hard to undo.
+Recommend thought process on new features; recommend implement now on obvious bugfixes.
+
+Full spec: `docs/implement-or-thought-process.md`.

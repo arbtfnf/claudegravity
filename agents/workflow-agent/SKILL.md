@@ -50,13 +50,26 @@ ln -sf "${TASK_ID}.md" .workflow/context/current-work.md
 2. Set `## Phase:` (Architect | Developer | QA | SRE | Investigator)  
 3. Update `## Last Updated:` after every significant action  
 
-### C. During work
+### C. Before implementation — ask
+
+After a work prompt and **before any code edit**, offer:
+
+1. **Implement now** — skip the rationale write-up; go to Developer. Persist a 5-line note (goal + files) in `.workflow/plans/<TASK-ID>.md` or `current-work.md`.
+2. **Show thought process** — stay in Architect. Write `## Why this approach` (Chosen / Because / Rejected / Revisit if). No code until `approved, implement`.
+
+Skip the question for `status`, typos / one-line fixes, already-approved slices. **Force** thought process for scoring, auth, data model, public API/contracts, anything hard to undo.
+
+User shortcuts: `implement now` / `just code` · `show thought process` / `why first`.
+
+Full spec: [docs/implement-or-thought-process.md](../../docs/implement-or-thought-process.md).
+
+### D. During work
 
 - Point your IDE agent at `.junie/AGENTS.md` (Junie) or `CLAUDE.md` + blueprint doc (Cursor / Claude Code)
 - Run spawn check manually if needed: `.junie/hooks/spawn_check.sh`
 - Verify PR/ticket state with tools—never trust the context file alone after 3+ days
 
-### D. Complete a ticket
+### E. Complete a ticket
 
 ```bash
 .junie/hooks/retrospective.sh
@@ -80,6 +93,7 @@ Then append 1–2 planning lessons and start the next ticket.
 3. **Verify before claim** — `gh pr view` / tracker API before reporting merge or status  
 4. **One task** — unless tickets are explicitly coupled  
 5. **Lessons loop** — read at pickup, write at archive  
+6. **Ask before code** — implement now vs thought process; never skip the question in silence on a new feature  
 
 See the [blueprint doc](../../docs/100-100-workflow-agent-blueprint.md) for the full 12-step guide and self-audit checklist.
 
@@ -100,7 +114,7 @@ Adapt paths to `.workflow/` and `.junie/` when porting:
     "@github/get_pull_request_status",
     "@github/get_pull_request_reviews"
   ],
-  "resources": [".junie/AGENTS.md", "docs/100-100-workflow-agent-blueprint.md"],
+  "resources": [".junie/AGENTS.md", "docs/100-100-workflow-agent-blueprint.md", "docs/implement-or-thought-process.md"],
   "hooks": {
     "spawn": "<absolute-path>/.junie/hooks/spawn_check.sh"
   }
